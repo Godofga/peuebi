@@ -17,7 +17,7 @@
 			header('location:main.php');
 
 
-        if(isset($_POST['categoria'])){
+      else  if(isset($_POST['categoria'])){
 
           $categ = new categoria($_POST['categoria']);
           $categ->salvar();
@@ -39,7 +39,7 @@
 				<input type="submit" value= "Realizar cadastro da categoria"/><br/>
 			</form>
 
-				<a href = "index.php"> Voltar à tela de login </a>
+				<a href = "main.php"> Voltar à tela inicial </a>
 		</div>
 
 	</body>
