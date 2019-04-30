@@ -189,7 +189,7 @@
 		}
 
 		function cadastrarPedidoItens($id_produto, $id_pedido, $produto, $quantidade, $valor, $total){
-			$this->bancoDao->exeSql("insert into pedidointes(id_produto, id_pedido, produto, quantidade, valor, total) values($id_produto, $id_pedido, '$produto', $quantidade, $valor, $total)");
+			$this->bancoDao->exeSql("insert into pedidoitens(id_produto, id_pedido, produto, quantidade, valor, total) values($id_produto, $id_pedido, '$produto', $quantidade, $valor, $total)");
 		}
 	}
 
