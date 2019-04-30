@@ -25,7 +25,7 @@
           	echo "feito";
           else
           	echo "nao feito";
-
+		}
     ?>
 
 	</head>
