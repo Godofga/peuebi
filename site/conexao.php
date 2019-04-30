@@ -195,10 +195,10 @@
 
 	class endereco{
 		private  $id;
-		private  $id_bairro;
+		private  $bairro;
 
-		function endereco( $id, $id_bairro){
-			$this->id = $id;
+		function endereco($estado,$cidade,$bairro){
+			$this->bairro = new bairro($estado,$cidade,$bairro);
 			$this->id_bairro = $id_bairro;
 		}
 	}
@@ -207,11 +207,31 @@
 		private $bairro;
 		private $id_cidade;
 		private $cidade;
-		private $estado;
+
 		function bairro($estado,$cidade,$bairro)
 		{
 			$this->cidade = new cidade($estado,$cidade);
 			$this->id_cidade = $this->cidade.getId();
+			$this->bairro = $bairro;
+			if($this->getId==0){
+				$this->cadastrarBairro($this->id_cidade);
+			}
+
+		}
+
+		function getId($id_cidade){
+			$comando = "select bairro.id from bairro where bairro=$this->bairro and id_cidade=$id_cidade";
+			$this->bancoDao.returnIdSql($comando);
+			return $id;
+		}
+
+		function cadastrarBairro($id_cidade){
+			$comando = "insert into bairro (id_cidade,bairro) values($id_cidade,$this->bairro)";
+			$this->bancoDao.exeSql($comando);
+		}
+
+		function getId(){
+			$this->getId($this->id_cidade);
 		}
 	}
 
@@ -224,7 +244,7 @@
 			$this->estado = new estado($estado);
 			$this->id_estado = $this->estado.getId();
 			$this->cidade = $cidade;
-			if($id_estado==0){
+			if($this->getId()){
 				$this->cadastrarCidade($id_estado);
 			}
 		}
