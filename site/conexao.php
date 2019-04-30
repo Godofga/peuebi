@@ -200,7 +200,7 @@
 		function endereco($estado,$cidade,$bairro){
 			$this->bairro = new bairro($estado,$cidade,$bairro);
 			$this->id_bairro = $this->bairro.getId();
-			if($this->get_id==0){
+			if($this->get_id()==0){
 				$this->cadastrarEndereco();
 			}
 		}
@@ -229,7 +229,7 @@
 			$this->cidade = new cidade($estado,$cidade);
 			$this->id_cidade = $this->cidade.getId();
 			$this->bairro = $bairro;
-			if($this->getId==0){
+			if($this->getId()==0){
 				$this->cadastrarBairro($this->id_cidade);
 			}
 
