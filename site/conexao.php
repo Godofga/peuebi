@@ -55,6 +55,8 @@
 						return true;
 					else
 						return false;
+				} else {
+					return $result;
 				}
 			} catch (Exception $e) {
 
