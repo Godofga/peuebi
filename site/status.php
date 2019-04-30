@@ -9,7 +9,10 @@
     <?php
       	require 'login.php';
 
-      	session_start();
+				if(!isset($_SESSION))
+	    	{
+	        	session_start();
+	    	}
 
       	checkLogin();
 
@@ -17,11 +20,18 @@
     			header('location:main.php');
 
 
-        else if(isset($_POST['pedido'])){
+        else if(isset($_POST['pedido']) && isset($_POST['estado'])){
 
-          $categ = new categoria($_POST['categoria']);
-          $categ->salvar();
-          echo 'Feito!<br>';
+          $con = new conexaoDao();
+					$id = $_POST['pedido'];
+					$status = $_POST['estado'];
+					if($con->exeSql("select * from pedido where id = $id",true)){
+						$con->exeSql("update pedido set situacao = '$status' where id = $id");
+          	echo 'Feito!<br/>';
+					}
+					else {
+						echo 'Id não existente!<br/>';
+					}
 
         }
 
@@ -39,10 +49,12 @@
 				<th>SITUAÇÃO</th>
 			</tr>
 			<?php
+
 				$con = new conexaoDao();
 				$query = "SELECT * from pedido";
+				$resultado =$con->exeSql($query);
 				if($con->exeSql($query,true)){
-					while($row = $con->exeSql($query)->fetch_assoc()){
+					while($row = $resultado->fetch_assoc()){
 						echo "<tr><td>". $row["id"]."</td><td>".$row["cpf_cliente"]."</td><td>".$row["momento"]."</td><td>".$row["situacao"]."</td></tr>";
 					}
 
@@ -52,7 +64,7 @@
 		</table>
 
 		<div>
-			<form action = "cad_categorias.php" method="POST">
+			<form action = "status.php" method="POST">
 				Id do pedido para alteração:<br/>
 				<input type="number" name="pedido"></input><br/>
         Novo estado do pedido:<br/>

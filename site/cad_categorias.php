@@ -9,7 +9,10 @@
     <?php
       	require 'login.php';
 
-      	session_start();
+				if(!isset($_SESSION))
+    	{
+        	session_start();
+    	}
 
       	checkLogin();
 
