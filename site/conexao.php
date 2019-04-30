@@ -54,7 +54,7 @@
 					if(mysqli_num_rows($result) > 0)
 						return true;
 					else
-					return false;
+						return false;
 				}
 			} catch (Exception $e) {
 
