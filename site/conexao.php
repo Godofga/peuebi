@@ -103,9 +103,14 @@
 		private $id;
 		private $categoria;
 
-		function categoria($id , $categoria){
-			$this->id = $id;
+		function categoria($categoria){
 			$this->categoria = $categoria;
+		}
+
+		function salvar(){
+			$con = new conexaoDao();
+			$con->exeSql("insert into categoria(categoria) values('$this->categoria')");
+
 		}
 	}
 
