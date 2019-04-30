@@ -134,7 +134,10 @@
 
 		function salvar(){
 			$con = new conexaoDao();
-			$con->exeSql("insert into categoria(categoria) values('$this->categoria')");
+			if(!$con->exeSql("SELECT * FROM categoria where categoria = '$this->categoria'",true))
+				$con->exeSql("insert into categoria(categoria) values('$this->categoria')");
+			else 
+				echo "categoria ja existente<br>";
 
 		}
 	}
