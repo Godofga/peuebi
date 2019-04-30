@@ -49,12 +49,13 @@
 
 				$result = mysqli_query($this->connection, $query);
 
-				if($res)
-					if(mysqli_num_rows($result) > 0){
+				if($res){
+					
+					if(mysqli_num_rows($result) > 0)
 						return true;
-					}else
+					else
 					return false;
-
+				}
 			} catch (Exception $e) {
 
 				print_r($e);
@@ -232,7 +233,6 @@
 
 	class estado{
 		private  $estado;
-		private  $bancoDao = new conexaoDao();
 
 		function estado($estado)
 		{			
@@ -244,12 +244,14 @@
 		}
 
 		function getId(){
-			$comando = "select estado.id from estado where estado='$estado'"
+			$bancoDao = new conexaoDao();
+			$comando = "select estado.id from estado where estado='$estado'";
 			$this->bancoDao.returnIdSql($comando);
 			return $id;
 		}
 
 		function cadastrarCidade(){
+			$bancoDao = new conexaoDao();
 			$comando = "insert into categoria (categoria) values($estado)";
 			$this->bancoDao.exeSql($comando);
 		}

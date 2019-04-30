@@ -25,7 +25,7 @@
 
     } else {
 
-      unsetSession();-
+      unsetSession();
       header('location:index.php?log=false');
 
     }
@@ -47,9 +47,9 @@
 
   function checkUser($usuario, $senha, $checkRoot = false){
     $con = new conexaoDao();
-    $query = "select * from usuario where nome_usuario = '$usuario' and senha = '$senha'";
-    $query += $checkRoot?" and root = true":"";
-    return $con->exeSql(query, true);
+    $queryy = "select * from usuario where nome_usuario = '$usuario' and senha = '$senha'";
+    $queryy = $checkRoot?$queryy." and root = true":$queryy;
+    return $con->exeSql($queryy, true);
     
   }
 
