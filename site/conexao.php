@@ -151,8 +151,7 @@
 		private $preco;
 		private $quantidade;
 
-		function produto($id, $id_categoria, $produto, $descricao, $imagem_produto, $preco, $quantidade){
-			$this->id = $id;
+		function produto($id_categoria, $produto, $descricao, $imagem_produto, $preco, $quantidade){
 			$this->id_categoria = $id_categoria;
 			$this->produto = $produto;
 			$this->descricao = $descricao;

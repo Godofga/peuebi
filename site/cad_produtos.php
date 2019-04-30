@@ -7,11 +7,19 @@
 		<meta charset="utf-8"/>
 
     <?php
-      require 'conexao.php';
+      	require 'login.php';
 
-        if(isset($_POST['categoria'])){
-          $categ = new categoria($_POST['categoria']);
-          $categ->salvar();
+        session_start();
+
+      	checkLogin();
+
+		if(!checkUser(true))
+			header('location:main.php');
+
+        if(isset($_POST['categoria'])&&isset($_POST['nome'])&&isset($_POST['descricao'])&&isset($_POST['imagem'])&&isset($_POST['preco'])&&isset($_POST['quantidade'])){
+        	
+          $product = new produto($_POST['categoria'],$_POST['nome'],$_POST['descricao'],$_POST['imagem'],$_POST['preco'],$_POST['quantidade'] );
+
           echo 'Feito!<br>';
         }
 
@@ -29,7 +37,7 @@
 				<input type="text" name="nome"></input><br/>
 				Descricao:
 				<input type="text" name="descricao"></input><br/>
-				Link da imagem:
+				Imagem:
 				<input type="file" name="imagem"></input><br/>
 				Preco:
 				<input type="number" name="preco"></input><br/>

@@ -11,7 +11,7 @@
       require 'login.php';
 
 			checkLogin();
-			$root = checkUser($_SESSION['usuario'],$_SESSION['senha'],true);
+			$root = checkUser(true);
 
 		?>
 
