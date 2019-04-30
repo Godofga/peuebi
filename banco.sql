@@ -11,13 +11,13 @@ create table cidade(
 	id int not null primary key auto_increment,
     id_estado int,
     foreign key(id) references estado (id),
-    cidade varchar(45)    
+    cidade varchar(45)
 );
 create table bairro(
 	id int not null primary key auto_increment,
     id_cidade int,
     foreign key(id) references cidade (id),
-    bairro varchar(45)    
+    bairro varchar(45)
 );
 create table endereco(
 	id int not null primary key auto_increment,
@@ -46,7 +46,7 @@ create table produto(
     descricao mediumtext,
     imagem_produto blob,
     preco float,
-    quantidade int    
+    quantidade int
 );
 create table pedido(
 	id int not null primary key auto_increment,

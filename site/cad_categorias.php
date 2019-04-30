@@ -13,7 +13,7 @@
 
       	checkLogin();
 
-		if(!checkUser(true))
+		if(!checkRoot())
 			header('location:main.php');
 
 
@@ -22,7 +22,7 @@
           $categ = new categoria($_POST['categoria']);
           $categ->salvar();
           echo 'Feito!<br>';
-          
+
         }
 
     ?>

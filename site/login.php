@@ -47,14 +47,19 @@
 
   }
 
-  function checkUser($checkRoot = false){
-    $usuario= $_SESSION['usuario'];
-    $senha= $_SESSION['senha'];
+  function checkUser($usuario,$senha){
     $con = new conexaoDao();
     $queryy = "select * from usuario where nome_usuario = '$usuario' and senha = '$senha'";
-     $queryy = $checkRoot?$queryy." and root = true":$queryy;
+    $queryy = $checkRoot?$queryy." and root = true":$queryy;
     return $con->exeSql($queryy, true);
-    
+
+  }
+  function checkRoot(){
+    $con = new conexaoDao();
+    $usuario = $_SESSION['usuario'];
+    $senha = $_SESSION['senha'];
+    $queryy = "select * from usuario where nome_usuario = '$usuario' and senha = '$senha' and root = true";
+    return $con->exeSql($queryy, true);
   }
 
   function unsetSession(){
