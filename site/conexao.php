@@ -75,9 +75,9 @@
 
 				$result = mysqli_query($this->connection, $query);
 
-				if($res)
 					if(mysqli_num_rows($result) > 0){
 						$valor=$result['id'];
+						echo $valor.'<br>';
 					}
 
 			} catch (Exception $e) {
@@ -184,7 +184,7 @@
 		{
 			$this->endereco = new endereco($estado,$cidade,$bairro);
 			$this->cpf = $cpf;
-			$this->id_endereco = $this->endereco.getId();
+			$this->id_endereco = $this->endereco->getId();
 			$this->nome = $nome;
 			$this->e_mail = $e_mail;
 			$this->nome_usuario = $nome_usuario;
@@ -206,8 +206,8 @@
 
 		function endereco($estado,$cidade,$bairro){
 			$this->bairro = new bairro($estado,$cidade,$bairro);
-			$this->id_bairro = $this->bairro.getId();
-			if($this->get_id()==0){
+			$this->id_bairro = $this->bairro->getId();
+			if($this->getId()==0){
 				$this->cadastrarEndereco();
 			}
 		}
@@ -215,14 +215,14 @@
 		function getId($id_bairro=null){
 			if($id_bairro){
 				$comando = "select endereco.id from bairro where id_bairro=$this->id_bairro";
-				return $this->bancoDao.returnIdSql($comando);
+				return $this->bancoDao->returnIdSql($comando);
 			} else
 				$this->getId($this->id_bairro);
 		}
 
 		function cadastrarEndereco($id_bairro){
-			$comando = "insert into endereco (id_bairro) values($this->bairro)";
-			$this->bancoDao.exeSql($comando);
+			$comando = "insert into endereco (id_bairro) values('$this->bairro')";
+			$this->bancoDao->exeSql($comando);
 		}
 	}
 
@@ -234,7 +234,7 @@
 		function bairro($estado,$cidade,$bairro)
 		{
 			$this->cidade = new cidade($estado,$cidade);
-			$this->id_cidade = $this->cidade.getId();
+			$this->id_cidade = $this->cidade->getId();
 			$this->bairro = $bairro;
 			if($this->getId()==0){
 				$this->cadastrarBairro($this->id_cidade);
@@ -244,15 +244,15 @@
 
 		function getId($id_cidade=null){
 			if($id_cidade){
-				$comando = "select bairro.id from bairro where bairro=$this->bairro and id_cidade=$id_cidade";
-				return $this->bancoDao.returnIdSql($comando);
+				$comando = "select bairro.id from bairro where bairro='$this->bairro' and id_cidade=$id_cidade";
+				return $this->bancoDao->returnIdSql($comando);
 			} else
 				$this->getId($this->id_cidade);	
 		}
 
 		function cadastrarBairro($id_cidade){
-			$comando = "insert into bairro (id_cidade,bairro) values($id_cidade,$this->bairro)";
-			$this->bancoDao.exeSql($comando);
+			$comando = "insert into bairro (id_cidade,bairro) values($id_cidade,'$this->bairro')";
+			$this->bancoDao->exeSql($comando);
 		}
 	}
 
@@ -263,7 +263,7 @@
 
 		function cidade( $estado, $cidade){
 			$this->estado = new estado($estado);
-			$this->id_estado = $this->estado.getId();
+			$this->id_estado = $this->estado->getId();
 			$this->cidade = $cidade;
 			if($this->getId()){
 				$this->cadastrarCidade($id_estado);
@@ -272,15 +272,15 @@
 
 		function getId($id_estado=null){
 			if($id_estado){
-				$comando = "select cidade.id from cidade where cidade=$this->cidade and id_estado=$id_estado";
-				return $this->bancoDao.returnIdSql($comando);
+				$comando = "select cidade.id from cidade where cidade='$this->cidade' and id_estado=$id_estado";
+				return $this->bancoDao->returnIdSql($comando);
 			} else 
 				$this->getId($this->id_estado);
 		}
 
 		function cadastrarCidade($id_estado){
-			$comando = "insert into cidade (id_estado,cidade) values($id_estado,$this->cidade)";
-			$this->bancoDao.exeSql($comando);
+			$comando = "insert into cidade (id_estado,cidade) values($id_estado,'$this->cidade')";
+			$this->bancoDao->exeSql($comando);
 		}
 
 	}
@@ -291,7 +291,7 @@
 
 		function estado($estado)
 		{			
-			$bancoDao = new conexaoDao();
+			$this->bancoDao = new conexaoDao();
 			$this->estado = $estado;
 			if($this->getId()==0)
 			{				
@@ -300,13 +300,13 @@
 		}
 
 		function getId(){
-			$comando = "select estado.id from estado where estado=$this->estado";
-			return $this->bancoDao.returnIdSql($comando);
+			$comando = "select estado.id from estado where estado='$this->estado'";
+			return $this->bancoDao->returnIdSql($comando);
 		}
 
 		function cadastrarEstado(){
-			$comando = "insert into estado (estado) values($estado)";
-			$this->bancoDao.exeSql($comando);
+			$comando = "insert into estado (estado) values('$this->estado')";
+			$this->bancoDao->exeSql($comando);
 		}
 	}
 
