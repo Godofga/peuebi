@@ -109,6 +109,8 @@
 
 		function salvar(){
 			$con = new conexaoDao();
+			//$idd=0;
+			//if()
 			$con->exeSql("insert into categoria(categoria) values('$this->categoria')");
 
 		}
