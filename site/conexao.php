@@ -173,7 +173,7 @@
 		private  $nome_usuario;
 		private  $senha;
 		private  $root;
-		private  $endereco();
+		private  $endereco;
 
 		function usuario( $cpf, $nome, $e_mail, $nome_usuario, $senha, $root,$estado,$cidade,$bairro)
 		{
