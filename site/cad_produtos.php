@@ -21,11 +21,11 @@
 
         else if(isset($_POST['categoria'])&&isset($_POST['nome'])&&isset($_POST['descricao'])&&isset($_POST['imagem'])&&isset($_POST['preco'])&&isset($_POST['quantidade'])){
 
-          $product = new produto($_POST['categoria'],$_POST['nome'],$_POST['descricao'],$_POST['imagem'],$_POST['preco'],$_POST['quantidade'] );
-
-          echo 'Feito!<br>';
-        }
-
+          if($product = new produto($_POST['categoria'],$_POST['nome'],$_POST['descricao'],$_POST['imagem'],$_POST['preco'],$_POST['quantidade'] ))
+          	echo "feito";
+          else
+          	echo "nao feito";
+		}
     ?>
 
 	</head>
