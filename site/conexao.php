@@ -150,11 +150,14 @@
 		private $categoria;
 		function produto($categoria, $produto, $descricao, $imagem_produto, $preco, $quantidade){
 			$this->bancoDao = new conexaoDao();
-			$this->categoria = new categoria();
+			$this->categoria = new categoria($categoria);
 			$this->id_categoria = $this->categoria->getId();
-			if ($this->getId($produto)==0) {
+			if ($this->getId($produto)==0&&$this->categoria.getId()!=0) {
 				$this->cadastrarProduto($this->id_categoria,$produto,$descricao,$imagem_produto,$preco,$quantidade);
-			}
+				return true;
+			}	else
+				return false;
+
 		}
 
 		function cadastrarProduto($id_categoria,$produto,$descricao,$imagem_produto,$preco,$quantidade){
