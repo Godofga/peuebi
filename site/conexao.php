@@ -171,23 +171,28 @@
 	}
 
 	class pedidoitens{
-		private  $id;
+		private  $pedido;
+		private  $bancoDao;
 		private  $id_produto;
 		private  $id_pedido;
-		private  $produto;
-		private  $quantidade;
-		private  $valor;
-		private  $total;
 
-		function pedidoitens( $id, $id_produto, $id_pedido, $produto, $quantidade, $valor, $total)
+		function pedidoitens($cpf_cliente, $produto, $quantidade, $valor)
 		{
-			$this->id = $id;
-			$this->id_categoria = $id_categoria;
-			$this->produto = $produto;
-			$this->descricao = $descricao;
-			$this->imagem_produto = $imagem_produto;
-			$this->preco = $preco;
-			$this->quantidade = $quantidade;
+			$this->bancoDao = new conexaoDao();
+			if ($this->getIdProduto($produto)!=0) {
+				$this->pedido = new pedido($cpf_cliente);
+				$this->id_produto = $this->getIdProduto($produto);	
+				$this->id_pedido = $this->pedido->getId();
+				$this->cadastrarPedidoItens($this->id_produto, $this->id_pedido, $produto, $quantidade, $valor, $valor*$quantidade);
+			}			
+		}
+
+		function getIdProduto($produto){
+			return $this->bancoDao->returnIdSql("select produto.id from produto where produto = '$produto'");
+		}
+
+		function cadastrarPedidoItens($id_produto, $id_pedido, $produto, $quantidade, $valor, $total){
+			$this->bancoDao->exeSql("insert into pedidointes(id_produto, id_pedido, produto, quantidade, valor, total) values($id_produto, $id_pedido, '$produto', $quantidade, $valor, $total)");
 		}
 	}
 
@@ -203,10 +208,13 @@
 			$this->situacao = "pendente";
 			date_default_timezone_set('America/Sao_Paulo');
 	  		$this->momento =  date('d/m/Y \à\s H:i:s');
-			if(verificarCpf==0)
+			if(verificarCpf!=0)
 			{
 				$this->cadastrarPedido($this->cpf_cliente,$this->momento,$this->situacao);
 			}
+		}
+		function getId(){
+			return $this->bancoDao->returnIdSql("select pedido.id from pedido where cpf_cliente='$this->cpf_cliente'");
 		}
 		function verificarCpf($cpf_cliente){
 			$comando = "select usuario.cpf from usuario where cpf= '$cpf_cliente' ";
@@ -369,8 +377,4 @@
 			$this->bancoDao->exeSql($comando);
 		}
 	}
-
-
-
-
 ?>
