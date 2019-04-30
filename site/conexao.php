@@ -173,11 +173,13 @@
 		private  $nome_usuario;
 		private  $senha;
 		private  $root;
+		private  $endereco();
 
-		function usuario( $cpf, $id_endereco, $nome, $e_mail, $nome_usuario, $senha, $root)
+		function usuario( $cpf, $nome, $e_mail, $nome_usuario, $senha, $root,$estado,$cidade,$bairro)
 		{
+			$this->endereco = new endereco($estado,$cidade,$bairro);
 			$this->cpf = $cpf;
-			$this->id_endereco = $id_endereco;
+			$this->id_endereco = $this->endereco.getId();
 			$this->nome = $nome;
 			$this->e_mail = $e_mail;
 			$this->nome_usuario = $nome_usuario;
@@ -187,7 +189,7 @@
 
 		function salvar(){// SE LEMBRAR DE MUDAR O NULL PARA O ID DO ENDEREÇO PROPRIAMENTE!!!!
 			$con = new conexaoDao();
-			$con->exeSql("insert into usuario(cpf,id_endereco,nome_cliente,e_mail,nome_usuario,senha,root) values('$this->cpf',			null     ,'$this->nome','$this->e_mail','$this->nome_usuario','$this->senha',$this->root)");
+			$con->exeSql("insert into usuario(cpf,id_endereco,nome_cliente,e_mail,nome_usuario,senha,root) values('$this->cpf',$this->id_endereco,'$this->nome','$this->e_mail','$this->nome_usuario','$this->senha',$this->root)");
 
 		}
 
