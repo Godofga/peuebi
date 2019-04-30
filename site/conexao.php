@@ -199,7 +199,22 @@
 
 		function endereco($estado,$cidade,$bairro){
 			$this->bairro = new bairro($estado,$cidade,$bairro);
-			$this->id_bairro = $id_bairro;
+			$this->id_bairro = $this->bairro.getId();
+		}
+
+		function getId($id_cidade){
+			$comando = "select bairro.id from bairro where bairro=$this->bairro and id_cidade=$id_cidade";
+			$this->bancoDao.returnIdSql($comando);
+			return $id;
+		}
+
+		function cadastrarBairro($id_cidade){
+			$comando = "insert into bairro (id_cidade,bairro) values($id_cidade,$this->bairro)";
+			$this->bancoDao.exeSql($comando);
+		}
+
+		function getId(){
+			$this->getId($this->id_cidade);
 		}
 	}
 
