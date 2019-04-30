@@ -235,9 +235,9 @@
 
 		function estado($estado)
 		{			
+			$this->estado = $estado;
 			if($this->getId==0)
-			{
-				$this->estado = $estado;
+			{				
 				$this->cadastrarCidade();
 			}
 		}
