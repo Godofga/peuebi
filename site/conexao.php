@@ -76,8 +76,8 @@
 				$result = mysqli_query($this->connection, $query);
 
 					if(mysqli_num_rows($result) > 0){
-						$valor=$result['id'];
-						echo $valor.'<br>';
+						$array = mysqli_fetch_assoc($result);
+						$valor=$array['id'];
 					}
 
 			} catch (Exception $e) {
@@ -196,6 +196,7 @@
 
 		function salvar(){// SE LEMBRAR DE MUDAR O NULL PARA O ID DO ENDEREÇO PROPRIAMENTE!!!!
 			$con = new conexaoDao();
+			
 			$con->exeSql("insert into usuario(cpf,id_endereco,nome_cliente,e_mail,nome_usuario,senha,root) values('$this->cpf',$this->id_endereco,'$this->nome','$this->e_mail','$this->nome_usuario','$this->senha',$this->root)");
 
 		}
@@ -212,20 +213,21 @@
 			$this->bairro = new bairro($estado,$cidade,$bairro);
 			$this->id_bairro = $this->bairro->getId();
 			if($this->getId()==0){
-				$this->cadastrarEndereco();
+				$this->cadastrarEndereco($this->id_bairro);
 			}
 		}
 
-		function getId($id_bairro=null){
-			if($id_bairro){
-				$comando = "select endereco.id from bairro where id_bairro=$this->id_bairro";
+		function getId(){
+			return $this->enviarId($this->id_bairro);
+		}
+
+		function enviarId($id_bairro){
+				$comando = "select endereco.id from endereco where id_bairro= $id_bairro ";
 				return $this->bancoDao->returnIdSql($comando);
-			} else
-				$this->getId($this->id_bairro);
 		}
 
 		function cadastrarEndereco($id_bairro){
-			$comando = "insert into endereco (id_bairro) values('$this->bairro')";
+			$comando = "insert into endereco (id_bairro) values('$id_bairro')";
 			$this->bancoDao->exeSql($comando);
 		}
 	}
@@ -248,12 +250,14 @@
 
 		}
 
-		function getId($id_cidade=null){
-			if($id_cidade){
+		function getId(){			
+			return $this->enviarId($this->id_cidade);
+			
+		}
+
+		function enviarId($id_cidade){
 				$comando = "select bairro.id from bairro where bairro='$this->bairro' and id_cidade=$id_cidade";
 				return $this->bancoDao->returnIdSql($comando);
-			} else
-				$this->getId($this->id_cidade);	
 		}
 
 		function cadastrarBairro($id_cidade){
@@ -273,17 +277,17 @@
 			$this->estado = new estado($estado);
 			$this->id_estado = $this->estado->getId();
 			$this->cidade = $cidade;
-			if($this->getId()){
-				$this->cadastrarCidade($id_estado);
+			if($this->getId()==0){
+				$this->cadastrarCidade($this->id_estado);
 			}
 		}
 
-		function getId($id_estado=null){
-			if($id_estado){
+		function getId(){
+				return $this->enviarId($this->id_estado);
+		}
+		function enviarId($id_estado){
 				$comando = "select cidade.id from cidade where cidade='$this->cidade' and id_estado=$id_estado";
 				return $this->bancoDao->returnIdSql($comando);
-			} else 
-				$this->getId($this->id_estado);
 		}
 
 		function cadastrarCidade($id_estado){
