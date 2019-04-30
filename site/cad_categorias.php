@@ -3,7 +3,7 @@
 
 	<head>
 
-		<title> Cadastro - Prata Shop</title>
+		<title> Cadastro de categorias - Prata Shop</title>
 		<meta charset="utf-8"/>
 
     <?php

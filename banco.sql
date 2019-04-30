@@ -44,7 +44,7 @@ create table produto(
     foreign key (id_categoria) references categoria (id),
     produto varchar(45),
     descricao mediumtext,
-    imagem_produto varchar(100),
+    imagem_produto blob,
     preco float,
     quantidade int    
 );
