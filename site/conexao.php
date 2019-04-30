@@ -179,9 +179,11 @@
 		private  $senha;
 		private  $root;
 		private  $endereco;
+		private  $bancoDao;
 
 		function usuario( $cpf, $nome, $e_mail, $nome_usuario, $senha, $root,$estado,$cidade,$bairro)
 		{
+			$this->bancoDao = new conexaoDao();
 			$this->endereco = new endereco($estado,$cidade,$bairro);
 			$this->cpf = $cpf;
 			$this->id_endereco = $this->endereco->getId();
@@ -203,8 +205,10 @@
 	class endereco{
 		private  $id_bairro;
 		private  $bairro;
+		private  $bancoDao;
 
 		function endereco($estado,$cidade,$bairro){
+			$this->bancoDao = new conexaoDao();
 			$this->bairro = new bairro($estado,$cidade,$bairro);
 			$this->id_bairro = $this->bairro->getId();
 			if($this->getId()==0){
@@ -230,9 +234,11 @@
 		private $bairro;
 		private $id_cidade;
 		private $cidade;
+		private  $bancoDao;
 
 		function bairro($estado,$cidade,$bairro)
 		{
+			$this->bancoDao = new conexaoDao();
 			$this->cidade = new cidade($estado,$cidade);
 			$this->id_cidade = $this->cidade->getId();
 			$this->bairro = $bairro;
@@ -260,8 +266,10 @@
 		private  $id_estado;
 		private  $cidade;
 		private  $estado;
+		private  $bancoDao;
 
 		function cidade( $estado, $cidade){
+			$this->bancoDao = new conexaoDao();
 			$this->estado = new estado($estado);
 			$this->id_estado = $this->estado->getId();
 			$this->cidade = $cidade;
