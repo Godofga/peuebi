@@ -11,6 +11,7 @@
       require 'login.php';
 
 			checkLogin();
+			$root = checkUser($_SESSION['usuario'],$_SESSION['senha'],true);
 
 		?>
 
@@ -19,9 +20,21 @@
 	<body>
 
 		<div>
+				<?php 
+					if($root)
+						echo " 
+						<a href = 'cad_produtos.php'> Cadastro de produtos </a> <br>
+						<a href = 'cad_categorias.php'> Cadastro de categorias </a> <br>
+						<a href = 'status.php'> Alterar status dos pedidos </a> <br>";
+					else
+						echo "<a href = 'compra.php'> Compra de produtos </a> <br>
+						<a href = 'historico.php'> Visualizar compras realizadas </a> <br>";
+				?>
+				
 
-				<a href = "cadastro.php"> Cadastrar-se </a> <br>
-        <a href = "login.php?exits=true"> Sair da sessão</a> <br>
+				
+
+				<a href = "login.php?exits=true"> Sair da sessão</a> <br>
 		</div>
 
 	</body>
