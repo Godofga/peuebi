@@ -10,11 +10,10 @@
       require 'conexao.php';
 
         if(isset($_POST['nome'])&&isset($_POST['usuario'])&&isset($_POST['senha'])&&isset($_POST['email'])&&isset($_POST['cpf'])&&isset($_POST['endereco'])){
-          $user = new usuario($_POST['cpf'],$_POST['endereco'],$_POST['nome'],$_POST['email'],$_POST['usuario'],$_POST['senha'],0);//$cpf, $id_endereco, $nome, $e_mail, $nome_usuario, $senha, $root)
+          $user = new usuario($_POST['cpf'],$_POST['endereco'],$_POST['nome'],$_POST['email'],$_POST['usuario'],$_POST['senha'],0);
           $user->salvar();
           echo 'Cadastrado com sucesso!<br>';
         }
-        //$user = new usuario();//$cpf, $id_endereco, $nome, $e_mail, $nome_usuario, $senha, $root)
 
     ?>
 
