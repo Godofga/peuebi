@@ -91,6 +91,31 @@
 
 
 		}
+		function returnCpfSql($query){
+
+			$this->conectar();
+			$valor = 0;
+			try
+			{
+
+				$result = mysqli_query($this->connection, $query);
+
+					if(mysqli_num_rows($result) > 0){
+						$array = mysqli_fetch_assoc($result);
+						$valor=$array['cpf'];
+					}
+
+			} catch (Exception $e) {
+
+				print_r($e);
+
+			}
+			$this->desconectar();
+
+			return $valor;
+
+
+		}
 
 		function check($query){
 
@@ -109,8 +134,6 @@
 
 		function salvar(){
 			$con = new conexaoDao();
-			//$idd=0;
-			//if()
 			$con->exeSql("insert into categoria(categoria) values('$this->categoria')");
 
 		}
@@ -159,16 +182,29 @@
 	}
 
 	class pedido{
-		private $id;
 		private $cpf_cliente;
 		private $momento;// = new DateTime();//da uma olhadinha aqui depois
-		private  $situacao;
+		private $situacao;
+		private $bancoDao;
 
-		function pedido( $id,  $cpf_cliente, $momento,  $situacao){
-			$this->id = $id;
+		function pedido($cpf_cliente){
+			$this->bancoDao = new conexaoDao();
 			$this->cpf_cliente = $cpf_cliente;
-			$this->momento = $momento;
-			$this->situacao = $situacao;
+			$this->situacao = "pendente";
+			date_default_timezone_set('America/Sao_Paulo');
+	  		$this->momento =  date('d/m/Y \à\s H:i:s');
+			if(verificarCpf==0)
+			{
+				$this->cadastrarPedido($this->cpf_cliente,$this->momento,$this->situacao);
+			}
+		}
+		function verificarCpf($cpf_cliente){
+			$comando = "select usuario.cpf from usuario where cpf= '$cpf_cliente' ";
+			return $this->bancoDao->returnCpfSql($comando);
+		}
+		function cadastrarPedido($cpf_cliente,$momento,$situacao){
+			$comando = "insert into pedido(cpf_cliente,momento,situacao) values('$cpf_cliente','$momento','$situacao')";
+			$this->bancoDao->exeSql($comando);
 		}
 	}
 
