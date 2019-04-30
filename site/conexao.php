@@ -148,20 +148,28 @@
 		private $id_categoria;
 		private $bancoDao;
 		private $categoria;
+		private $produto;
+		private $descricao;
+		private $imagem_produto;
+		private $preco;
+		private $quantidade;
 		function produto($categoria, $produto, $descricao, $imagem_produto, $preco, $quantidade){
 			$this->bancoDao = new conexaoDao();
 			$this->categoria = new categoria($categoria);
 			$this->id_categoria = $this->categoria->getId();
-			if ($this->getId($produto)==0&&$this->categoria->getId()!=0) {
-				$this->cadastrarProduto($this->id_categoria,$produto,$descricao,$imagem_produto,$preco,$quantidade);
-				return false;
-			}	else
-				return true;
+			$this->$produto = $produto;
+			$this->descricao = $descricao;
+			$this->imagem_produto = $imagem_produto;
+			$this->preco = $preco;
+			$this->quantidade = $quantidade;				
 
 		}
 
-		function cadastrarProduto($id_categoria,$produto,$descricao,$imagem_produto,$preco,$quantidade){
-			$this->bancoDao->exeSql("INSERT INTO produto(id_categoria,produto,descricao,imagem_produto,preco,quantidade) VALUES ($id_categoria,'$produto','$descricao',$imagem_produto,$preco,$quantidade)");
+		function cadastrarProduto(){
+			if ($this->getId($this->produto)==0&&$this->categoria->getId()!=0){
+			$this->bancoDao->exeSql("INSERT INTO produto(id_categoria,produto,descricao,imagem_produto,preco,quantidade) VALUES ($this->id_categoria,'$this->produto','$this->descricao',$this->imagem_produto,$this->preco,$this->quantidade)");
+				return true;
+			} else return false;
 		}
 
 		function getId($produto){
