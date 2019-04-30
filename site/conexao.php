@@ -205,7 +205,7 @@
 		function endereco($estado,$cidade,$bairro){
 			$this->bairro = new bairro($estado,$cidade,$bairro);
 			$this->id_bairro = $this->bairro.getId();
-			if($this->get_id==0){
+			if($this->get_id()==0){
 				$this->cadastrarEndereco();
 			}
 		}
@@ -234,24 +234,23 @@
 			$this->cidade = new cidade($estado,$cidade);
 			$this->id_cidade = $this->cidade.getId();
 			$this->bairro = $bairro;
-			if($this->getId==0){
+			if($this->getId()==0){
 				$this->cadastrarBairro($this->id_cidade);
 			}
 
 		}
 
-		function getId($id_cidade){
-			$comando = "select bairro.id from bairro where bairro=$this->bairro and id_cidade=$id_cidade";
-			return $this->bancoDao.returnIdSql($comando);
+		function getId($id_cidade=null){
+			if($id_cidade){
+				$comando = "select bairro.id from bairro where bairro=$this->bairro and id_cidade=$id_cidade";
+				return $this->bancoDao.returnIdSql($comando);
+			} else
+				$this->getId($this->id_cidade);	
 		}
 
 		function cadastrarBairro($id_cidade){
 			$comando = "insert into bairro (id_cidade,bairro) values($id_cidade,$this->bairro)";
 			$this->bancoDao.exeSql($comando);
-		}
-
-		function getId(){
-			$this->getId($this->id_cidade);
 		}
 	}
 
@@ -269,21 +268,18 @@
 			}
 		}
 
-		function getId($id_estado){
-			$comando = "select cidade.id from cidade where cidade=$this->cidade and id_estado=$id_estado";
-			return $this->bancoDao.returnIdSql($comando);
+		function getId($id_estado=null){
+			if($id_estado){
+				$comando = "select cidade.id from cidade where cidade=$this->cidade and id_estado=$id_estado";
+				return $this->bancoDao.returnIdSql($comando);
+			} else 
+				$this->getId($this->id_estado);
 		}
 
 		function cadastrarCidade($id_estado){
 			$comando = "insert into cidade (id_estado,cidade) values($id_estado,$this->cidade)";
 			$this->bancoDao.exeSql($comando);
 		}
-
-		function getId(){
-			$this->getId($this->id_estado);
-		}
-
-
 
 	}
 
