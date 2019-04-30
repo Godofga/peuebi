@@ -50,7 +50,7 @@
 				$result = mysqli_query($this->connection, $query);
 
 				if($res){
-					
+
 					if(mysqli_num_rows($result) > 0)
 						return true;
 					else
@@ -117,11 +117,6 @@
 
 		}
 
-		function check($query){
-
-		}
-
-
 	}
 
 	class categoria{
@@ -136,7 +131,7 @@
 			$con = new conexaoDao();
 			if(!$con->exeSql("SELECT * FROM categoria where categoria = '$this->categoria'",true))
 				$con->exeSql("insert into categoria(categoria) values('$this->categoria')");
-			else 
+			else
 				echo "categoria ja existente<br>";
 
 		}
@@ -181,10 +176,10 @@
 			$this->bancoDao = new conexaoDao();
 			if ($this->getIdProduto($produto)!=0) {
 				$this->pedido = new pedido($cpf_cliente);
-				$this->id_produto = $this->getIdProduto($produto);	
+				$this->id_produto = $this->getIdProduto($produto);
 				$this->id_pedido = $this->pedido->getId();
 				$this->cadastrarPedidoItens($this->id_produto, $this->id_pedido, $produto, $quantidade, $valor, $valor*$quantidade);
-			}			
+			}
 		}
 
 		function getIdProduto($produto){
@@ -252,7 +247,7 @@
 
 		function salvar(){// SE LEMBRAR DE MUDAR O NULL PARA O ID DO ENDEREÇO PROPRIAMENTE!!!!
 			$con = new conexaoDao();
-			
+
 			$con->exeSql("insert into usuario(cpf,id_endereco,nome_cliente,e_mail,nome_usuario,senha,root) values('$this->cpf',$this->id_endereco,'$this->nome','$this->e_mail','$this->nome_usuario','$this->senha',$this->root)");
 
 		}
@@ -306,9 +301,9 @@
 
 		}
 
-		function getId(){			
+		function getId(){
 			return $this->enviarId($this->id_cidade);
-			
+
 		}
 
 		function enviarId($id_cidade){
@@ -358,11 +353,11 @@
 		private  $bancoDao;
 
 		function estado($estado)
-		{			
+		{
 			$this->bancoDao = new conexaoDao();
 			$this->estado = $estado;
 			if($this->getId()==0)
-			{				
+			{
 				$this->cadastrarEstado();
 			}
 		}

@@ -14,7 +14,7 @@
           $user = new usuario($_POST['cpf'],$_POST['nome'],$_POST['email'],$_POST['usuario'],$_POST['senha'],0,$_POST['estado'],$_POST['cidade'],$_POST['bairro']);
           $user->salvar();
           echo 'Feito!<br>';
-          
+
         }
 
     ?>
@@ -38,9 +38,9 @@
 				<input type="text" name="cpf"></input><br/>
         Cidade:<br/>
 				<input type="text" name="cidade"></input><br/>
-		Estado:<br/>
+				Estado:<br/>
 				<input type="text" name= "estado"></input><br/>
-		Bairro:<br/>
+				Bairro:<br/>
 				<input type="text" name="bairro"></input><br/>
 
 				<input type="submit" value= "Realizar cadastro"/><br/>

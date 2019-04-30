@@ -35,13 +35,13 @@
 				<input type="text" name="categoria"></input><br/>
 				Nome:<br/>
 				<input type="text" name="nome"></input><br/>
-				Descricao:
+				Descricao:<br/>
 				<input type="text" name="descricao"></input><br/>
-				Imagem:
+				Imagem:<br/>
 				<input type="file" name="imagem"></input><br/>
-				Preco:
+				Preco:<br/>
 				<input type="number" name="preco"></input><br/>
-				Quantidade:
+				Quantidade:<br/>
 				<input type="number" name="quantidade"></input><br/>
 				<input type="submit" value= "Realizar cadastro da categoria"/><br/>
 			</form>
