@@ -1,6 +1,5 @@
 <?php
 	class conexaoDao{
-		public $found;
 		private $servidor;
 		private $database;
 		private $senha;
@@ -44,7 +43,6 @@
 		function exeSql($query, $res=false){
 
 			$this->conectar();
-			$this->found = false;
 
 			try
 			{
@@ -53,8 +51,9 @@
 
 				if($res)
 					if(mysqli_num_rows($result) > 0){
-						$this->found = true;
-					}
+						return true;
+					}else
+					return false;
 
 			} catch (Exception $e) {
 
@@ -64,7 +63,9 @@
 
 			$this->desconectar();
 
-		}
+		} 
+
+
 
 		function returnIdSql($query){
 

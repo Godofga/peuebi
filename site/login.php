@@ -16,10 +16,7 @@
     $usuario = $_POST['usuario'];
     $senha = $_POST['senha'];
 
-    $con = new conexaoDao();
-    $con->exeSql("select * from usuario where nome_usuario = '$usuario' and senha = '$senha'", true);
-
-    if($con->found) {
+    if(checkUser($usuario,$senha)) {
 
       $_SESSION['usuario'] = $usuario;
       $_SESSION['senha'] = $senha;
@@ -36,12 +33,9 @@
 
   function checkLogin(){
 
-    if(!isset($_SESSION['usuario']) || !isset($_SESSION['senha'])){
+    if(!isset($_SESSION['usuario']) || !isset($_SESSION['senha']))
+      exitSession();
 
-      unsetSession();
-      header('location:index.php');
-
-    }
   }
 
   function exitSession(){
@@ -49,6 +43,14 @@
     unsetSession();
     header('location:index.php');
 
+  }
+
+  function checkUser($usuario, $senha, $checkRoot = false){
+    $con = new conexaoDao();
+    $query = "select * from usuario where nome_usuario = '$usuario' and senha = '$senha'";
+    $query += $checkRoot?" and root = true":"";
+    return $con->exeSql(query, true);
+    
   }
 
   function unsetSession(){
