@@ -287,10 +287,11 @@
 
 	class estado{
 		private  $estado;
-		private  $bancoDao = new conexaoDao();
+		private  $bancoDao;
 
 		function estado($estado)
 		{			
+			$bancoDao = new conexaoDao();
 			$this->estado = $estado;
 			if($this->getId()==0)
 			{				
