@@ -22,22 +22,11 @@
 	<body>
 
 		<div>
-			<form action = "cadastro.php" method="POST">
-
-        Nome:<br/>
-				<input type="text" name="nome"></input><br/>
-				Usuário:<br/>
+			<form action = "cad_categorias.php" method="POST">
+				Categoria:<br/>
 				<input type="text" name="usuario"></input><br/>
-				Senha:<br/>
-				<input type="password" name="senha"></input><br/>
-        E-mail:<br/>
-				<input type="email" name="email"></input><br/>
-        CPF:<br/>
-				<input type="text" name="cpf"></input><br/>
-        Id do endereço:<br/>
-				<input type="text" name="endereco"></input><br/>
 
-				<input type="submit" value= "Realizar cadastro"/><br/>
+				<input type="submit" value= "Realizar cadastro da categoria"/><br/>
 			</form>
 
 				<a href = "index.php"> Voltar à tela de login </a>
