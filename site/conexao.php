@@ -229,29 +229,42 @@
 		private  $nome_usuario;
 		private  $senha;
 		private  $root;
+		private  $feito=false;
 		private  $endereco;
 		private  $bancoDao;
 
 		function usuario( $cpf, $nome, $e_mail, $nome_usuario, $senha, $root,$estado,$cidade,$bairro)
 		{
 			$this->bancoDao = new conexaoDao();
-			$this->endereco = new endereco($estado,$cidade,$bairro);
-			$this->cpf = $cpf;
-			$this->id_endereco = $this->endereco->getId();
-			$this->nome = $nome;
-			$this->e_mail = $e_mail;
-			$this->nome_usuario = $nome_usuario;
-			$this->senha = $senha;
-			$this->root = $root;
+			if($this->verificarUsuario($nome_usuario,$cpf)){				
+				$this->endereco = new endereco($estado,$cidade,$bairro);
+				$this->cpf = $cpf;
+				$this->id_endereco = $this->endereco->getId();
+				$this->nome = $nome;
+				$this->e_mail = $e_mail;
+				$this->nome_usuario = $nome_usuario;
+				$this->senha = $senha;
+				$this->root = $root;
+				$this->feito=true;
+			}
 		}
 
 		function salvar(){// SE LEMBRAR DE MUDAR O NULL PARA O ID DO ENDEREÇO PROPRIAMENTE!!!!
-			$con = new conexaoDao();
-
-			$con->exeSql("insert into usuario(cpf,id_endereco,nome_cliente,e_mail,nome_usuario,senha,root) values('$this->cpf',$this->id_endereco,'$this->nome','$this->e_mail','$this->nome_usuario','$this->senha',$this->root)");
-
+			if($this->feito){
+				$this->bancoDao->exeSql("insert into usuario(cpf,id_endereco,nome_cliente,e_mail,nome_usuario,senha,root) values('$this->cpf',$this->id_endereco,'$this->nome','$this->e_mail','$this->nome_usuario','$this->senha',$this->root)");
+				return true;
+			} else 
+				return false;
 		}
 
+		function verificarUsuario($nome_usuario,$cpf){
+			if($this->bancoDao->exeSql("select * from usuario where nome_usuario = '$nome_usuario'",true))
+				return false;
+			else if($this->bancoDao->exeSql("select * from usuario where cpf = '$cpf'",true))
+				return false;
+			else
+				return true;
+		}
 	}
 
 	class endereco{
