@@ -217,16 +217,20 @@
 	}
 
 	class cidade{
-		private  $id;
 		private  $id_estado;
 		private  $cidade;
+		private  $estado;
+		private  $bancoDao = new conexaoDao();
 
-		function cidade( $id, $id_estado, $cidade){
-			$this->id = $id;
-			$this->id_estado = $id_estado;
+		function cidade( $estado, $cidade){
+			$this->estado = new estado($estado);
+			$this->id_estado = $this->estado.getId();
 			$this->cidade = $cidade;
-
 		}
+
+		function cadastrarCidade;
+
+
 	}
 
 	class estado{
@@ -238,7 +242,7 @@
 			$this->estado = $estado;
 			if($this->getId==0)
 			{				
-				$this->cadastrarCidade();
+				$this->cadastrarEstado();
 			}
 		}
 
@@ -248,7 +252,7 @@
 			return $id;
 		}
 
-		function cadastrarCidade(){
+		function cadastrarEstado(){
 			$comando = "insert into categoria (categoria) values($estado)";
 			$this->bancoDao.exeSql($comando);
 		}
