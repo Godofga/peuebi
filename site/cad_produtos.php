@@ -46,7 +46,7 @@
 				<input type="submit" value= "Realizar cadastro da categoria"/><br/>
 			</form>
 
-				<a href = "index.php"> Voltar à tela de login </a>
+				<a href = "main.php"> Voltar à tela inicial </a>
 		</div>
 
 	</body>
