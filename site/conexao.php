@@ -204,15 +204,14 @@
 	}
 
 	class bairro{
-		private  $id;
-		private  $id_cidade;
-		private  $bairro;
-
-		function bairro( $id, $id_cidade, $bairro)
+		private $bairro;
+		private $id_cidade;
+		private $cidade;
+		private $estado;
+		function bairro($estado,$cidade,$bairro)
 		{
-			$this->id = $id;
-			$this->id_cidade = $id_cidade;
-			$this->id_bairro = $id_bairro;
+			$this->cidade = new cidade($estado,$cidade);
+			$this->id_cidade = $this->cidade.getId();
 		}
 	}
 
@@ -220,15 +219,31 @@
 		private  $id_estado;
 		private  $cidade;
 		private  $estado;
-		private  $bancoDao = new conexaoDao();
 
 		function cidade( $estado, $cidade){
 			$this->estado = new estado($estado);
 			$this->id_estado = $this->estado.getId();
 			$this->cidade = $cidade;
+			if($id_estado==0){
+				$this->cadastrarCidade($id_estado);
+			}
 		}
 
-		function cadastrarCidade;
+		function getId($id_estado){
+			$comando = "select cidade.id from cidade where cidade=$this->cidade and id_estado=$id_estado";
+			$this->bancoDao.returnIdSql($comando);
+			return $id;
+		}
+
+		function cadastrarCidade($id_estado){
+			$comando = "insert into cidade (id_estado,cidade) values($id_estado,$this->cidade)";
+			$this->bancoDao.exeSql($comando);
+		}
+
+		function getId(){
+			$this->getId($this->id_estado);
+		}
+
 
 
 	}
@@ -240,20 +255,20 @@
 		function estado($estado)
 		{			
 			$this->estado = $estado;
-			if($this->getId==0)
+			if($this->getId()==0)
 			{				
 				$this->cadastrarEstado();
 			}
 		}
 
 		function getId(){
-			$comando = "select estado.id from estado where estado='$estado'"
+			$comando = "select estado.id from estado where estado=$this->estado";
 			$this->bancoDao.returnIdSql($comando);
 			return $id;
 		}
 
 		function cadastrarEstado(){
-			$comando = "insert into categoria (categoria) values($estado)";
+			$comando = "insert into estado (estado) values($estado)";
 			$this->bancoDao.exeSql($comando);
 		}
 	}
