@@ -23,7 +23,10 @@
 
           $product = new produto($_POST['categoria'],$_POST['nome'],$_POST['descricao'],$_POST['imagem'],$_POST['preco'],$_POST['quantidade'] );
 
-          echo 'Feito!<br>';
+          if($product->salvar())
+          	echo 'Feito!<br>';
+          else 
+          	echo "Não feito";
         }
 
     ?>
