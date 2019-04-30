@@ -140,25 +140,32 @@
 				echo "categoria ja existente<br>";
 
 		}
+
+		function getId(){
+			$con = new conexaoDao();
+			return $con->returnIdSql("select categoria.id from categoria where categoria = '$this->categoria'");
+		}
 	}
 
 	class produto{
-		private $id;
 		private $id_categoria;
-		private $produto;
-		private $descricao;
-		private $imagem_produto;
-		private $preco;
-		private $quantidade;
+		private $bancoDao;
+		private $categoria;
+		function produto($categoria, $produto, $descricao, $imagem_produto, $preco, $quantidade){
+			$this->bancoDao = new conexaoDao();
+			$this->categoria = new categoria();
+			$this->id_categoria = $this->categoria->getId();
+			if ($this->getId($produto)==0) {
+				$this->cadastrarProduto($this->id_categoria,$produto,$descricao,$imagem_produto,$preco,$quantidade);
+			}
+		}
 
-		function produto($id, $id_categoria, $produto, $descricao, $imagem_produto, $preco, $quantidade){
-			$this->id = $id;
-			$this->id_categoria = $id_categoria;
-			$this->produto = $produto;
-			$this->descricao = $descricao;
-			$this->imagem_produto = $imagem_produto;
-			$this->preco = $preco;
-			$this->quantidade = $quantidade;
+		function cadastrarProduto($id_categoria,$produto,$descricao,$imagem_produto,$preco,$quantidade){
+			$this->bancoDao->exeSql("INSERT INTO produto(id_categoria,produto,descricao,imagem_produto,preco,quantidade) VALUES ($id_categoria,'$produto','$descricao',$imagem_produto,$preco,$quantidade)");
+		}
+
+		function getId($produto){
+			return $this->bancoDao->returnIdSql("SELECT produto.id from produto where produto='$produto'");
 		}
 
 	}
