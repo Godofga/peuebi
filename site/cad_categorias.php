@@ -3,16 +3,26 @@
 
 	<head>
 
-		<title> Cadastro - Prata Shop</title>
+		<title> Cadastro de categorias - Prata Shop</title>
 		<meta charset="utf-8"/>
 
     <?php
-      require 'conexao.php';
+      	require 'login.php';
+
+      	session_start();
+
+      	checkLogin();
+
+		if(!checkUser(true))
+			header('location:main.php');
+
 
         if(isset($_POST['categoria'])){
+
           $categ = new categoria($_POST['categoria']);
           $categ->salvar();
           echo 'Feito!<br>';
+          
         }
 
     ?>

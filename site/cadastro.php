@@ -10,9 +10,11 @@
       require 'conexao.php';
 
         if(isset($_POST['nome'])&&isset($_POST['usuario'])&&isset($_POST['senha'])&&isset($_POST['email'])&&isset($_POST['cpf'])&&isset($_POST['cidade'])&&isset($_POST['estado'])&&isset($_POST['bairro'])){
+
           $user = new usuario($_POST['cpf'],$_POST['nome'],$_POST['email'],$_POST['usuario'],$_POST['senha'],0,$_POST['estado'],$_POST['cidade'],$_POST['bairro']);
           $user->salvar();
           echo 'Feito!<br>';
+          
         }
 
     ?>
