@@ -205,18 +205,17 @@
 			}
 		}
 
-		function getId($id_bairro){
-			$comando = "select endereco.id from bairro where id_bairro=$this->id_bairro";
-			return $this->bancoDao.returnIdSql($comando);
+		function getId($id_bairro=null){
+			if($id_bairro){
+				$comando = "select endereco.id from bairro where id_bairro=$this->id_bairro";
+				return $this->bancoDao.returnIdSql($comando);
+			} else
+				$this->getId($this->id_bairro);
 		}
 
 		function cadastrarEndereco($id_bairro){
 			$comando = "insert into endereco (id_bairro) values($this->bairro)";
 			$this->bancoDao.exeSql($comando);
-		}
-
-		function getId(){
-			$this->getId($this->id_bairro);
 		}
 	}
 
