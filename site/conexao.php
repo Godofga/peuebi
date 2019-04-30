@@ -194,20 +194,23 @@
 	}
 
 	class endereco{
-		private  $id;
+		private  $id_bairro;
 		private  $bairro;
 
 		function endereco($estado,$cidade,$bairro){
 			$this->bairro = new bairro($estado,$cidade,$bairro);
 			$this->id_bairro = $this->bairro.getId();
+			if($this->get_id==0){
+				$this->cadastrarEndereco();
+			}
 		}
 
 		function getId($id_bairro){
-			$comando = "select endereco.id from bairro where bairro=$this->bairro and id_cidade=$id_cidade";
+			$comando = "select endereco.id from bairro where id_bairro=$this->id_bairro";
 			return $this->bancoDao.returnIdSql($comando);
 		}
 
-		function cadastrarBairro($id_bairro){
+		function cadastrarEndereco($id_bairro){
 			$comando = "insert into endereco (id_bairro) values($this->bairro)";
 			$this->bancoDao.exeSql($comando);
 		}
