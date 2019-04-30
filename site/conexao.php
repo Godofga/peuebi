@@ -203,9 +203,8 @@
 		}
 
 		function getId($id_bairro){
-			$comando = "select bairro.id from bairro where bairro=$this->bairro and id_cidade=$id_cidade";
-			$this->bancoDao.returnIdSql($comando);
-			return $id;
+			$comando = "select endereco.id from bairro where bairro=$this->bairro and id_cidade=$id_cidade";
+			return $this->bancoDao.returnIdSql($comando);
 		}
 
 		function cadastrarBairro($id_bairro){
