@@ -12,7 +12,7 @@
         if(isset($_POST['categoria'])){
           $categ = new categoria($_POST['categoria']);
           $categ->salvar();
-          echo 'Cadastrado com sucesso!<br>';
+          echo 'Feito!<br>';
         }
 
     ?>

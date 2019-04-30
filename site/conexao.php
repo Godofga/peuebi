@@ -54,7 +54,7 @@
 					if(mysqli_num_rows($result) > 0)
 						return true;
 					else
-					return false;
+						return false;
 				}
 			} catch (Exception $e) {
 
@@ -109,9 +109,10 @@
 
 		function salvar(){
 			$con = new conexaoDao();
-			//$idd=0;
-			//if()
-			$con->exeSql("insert into categoria(categoria) values('$this->categoria')");
+			if(!$con->exeSql("SELECT * FROM categoria WHERE categoria = '$this->categoria'", true))
+				$con->exeSql("insert into categoria(categoria) values('$this->categoria')");
+			else
+				echo "Categoria já existente<br>";
 
 		}
 	}
