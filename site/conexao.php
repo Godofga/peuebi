@@ -173,11 +173,11 @@
 		private  $id_produto;
 		private  $id_pedido;
 
-		function pedidoitens($cpf_cliente, $produto, $quantidade, $valor)
+		function pedidoitens($nome_cliente, $produto, $quantidade, $valor)
 		{
 			$this->bancoDao = new conexaoDao();
 			if ($this->getIdProduto($produto)!=0) {
-				$this->pedido = new pedido($cpf_cliente);
+				$this->pedido = new pedido($nome_cliente);
 				$this->id_produto = $this->getIdProduto($produto);
 				$this->id_pedido = $this->pedido->getId();
 				$this->cadastrarPedidoItens($this->id_produto, $this->id_pedido, $produto, $quantidade, $valor, $valor*$quantidade);
@@ -199,22 +199,22 @@
 		private $situacao;
 		private $bancoDao;
 
-		function pedido($cpf_cliente){
+		function pedido($nome_cliente){
 			$this->bancoDao = new conexaoDao();
-			$this->cpf_cliente = $cpf_cliente;
+			$this->cpf_cliente = $this->verificarCpf($nome_cliente);
 			$this->situacao = "pendente";
 			date_default_timezone_set('America/Sao_Paulo');
 	  		$this->momento =  date('d/m/Y \à\s H:i:s');
-			if(verificarCpf!=0)
+			if($this->verificarCpf!=0)
 			{
-				$this->cadastrarPedido($this->cpf_cliente,$this->momento,$this->situacao);
+				$this->cadastrarPedido($this->nome_cliente,$this->momento,$this->situacao);
 			}
 		}
 		function getId(){
 			return $this->bancoDao->returnIdSql("select pedido.id from pedido where cpf_cliente='$this->cpf_cliente'");
 		}
-		function verificarCpf($cpf_cliente){
-			$comando = "select usuario.cpf from usuario where cpf= '$cpf_cliente' ";
+		function verificarCpf($nome_cliente){
+			$comando = "select * from usuario where nome_usuario= '$nome_cliente' ";
 			return $this->bancoDao->returnCpfSql($comando);
 		}
 		function cadastrarPedido($cpf_cliente,$momento,$situacao){
