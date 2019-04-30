@@ -154,9 +154,9 @@
 			$this->id_categoria = $this->categoria->getId();
 			if ($this->getId($produto)==0&&$this->categoria->getId()!=0) {
 				$this->cadastrarProduto($this->id_categoria,$produto,$descricao,$imagem_produto,$preco,$quantidade);
-				return true;
-			}	else
 				return false;
+			}	else
+				return true;
 
 		}
 
