@@ -55,6 +55,8 @@
 						return true;
 					else
 						return false;
+				} else {
+					return $result;
 				}
 			} catch (Exception $e) {
 
@@ -236,7 +238,7 @@
 		function usuario( $cpf, $nome, $e_mail, $nome_usuario, $senha, $root,$estado,$cidade,$bairro)
 		{
 			$this->bancoDao = new conexaoDao();
-			if($this->verificarUsuario($nome_usuario,$cpf)){				
+			if($this->verificarUsuario($nome_usuario,$cpf)){
 				$this->endereco = new endereco($estado,$cidade,$bairro);
 				$this->cpf = $cpf;
 				$this->id_endereco = $this->endereco->getId();
@@ -253,7 +255,7 @@
 			if($this->feito){
 				$this->bancoDao->exeSql("insert into usuario(cpf,id_endereco,nome_cliente,e_mail,nome_usuario,senha,root) values('$this->cpf',$this->id_endereco,'$this->nome','$this->e_mail','$this->nome_usuario','$this->senha',$this->root)");
 				return true;
-			} else 
+			} else
 				return false;
 		}
 

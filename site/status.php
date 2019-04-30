@@ -33,9 +33,22 @@
 
 		<table>
 			<tr>
+				<th>ID</th>
+				<th>CPF</th>
+				<th>MOMENTO</th>
+				<th>SITUAÇÃO</th>
+			</tr>
+			<?php
+				$con = new conexaoDao();
+				$query = "SELECT * from pedido";
+				if($con->exeSql($query,true)){
+					while($row = $con->exeSql($query)->fetch_assoc()){
+						echo "<tr><td>". $row["id"]."</td><td>".$row["cpf_cliente"]."</td><td>".$row["momento"]."</td><td>".$row["situacao"]."</td></tr>";
+					}
 
-			<th>ID</th>
-		</tr>
+				}
+
+			 ?>
 		</table>
 
 		<div>
