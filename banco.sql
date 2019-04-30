@@ -51,7 +51,7 @@ create table produto(
 create table pedido(
 	id int not null primary key auto_increment,
     cpf_cliente varchar(45),
-    foreign key (cpf_cliente) references cliente (cpf),
+    foreign key (cpf_cliente) references usuario (cpf),
     momento date,
     situacao varchar(45)
 );
