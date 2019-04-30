@@ -66,6 +66,32 @@
 
 		}
 
+		function returnIdSql($query){
+
+			$this->conectar();
+			$valor = 0;
+			try
+			{
+
+				$result = mysqli_query($this->connection, $query);
+
+				if($res)
+					if(mysqli_num_rows($result) > 0){
+						$valor=$result['id'];
+					}
+
+			} catch (Exception $e) {
+
+				print_r($e);
+
+			}
+			$this->desconectar();
+
+			return $valor;
+
+
+		}
+
 		function check($query){
 
 		}
@@ -204,12 +230,27 @@
 	}
 
 	class estado{
-		private  $id;
 		private  $estado;
+		private  $bancoDao = new conexaoDao();
 
-		function estado( $id, $estado){
-			$this->id = $id;
-			$this->estado = $estado;
+		function estado($estado)
+		{			
+			if($this->getId==0)
+			{
+				$this->estado = $estado;
+				$this->cadastrarCidade();
+			}
+		}
+
+		function getId(){
+			$comando = "select estado.id from estado where estado='$estado'"
+			$this->bancoDao.returnIdSql($comando);
+			return $id;
+		}
+
+		function cadastrarCidade(){
+			$comando = "insert into categoria (categoria) values($estado)";
+			$this->bancoDao.exeSql($comando);
 		}
 	}
 
