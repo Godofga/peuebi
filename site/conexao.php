@@ -157,7 +157,7 @@
 			$this->bancoDao = new conexaoDao();
 			$this->categoria = new categoria($categoria);
 			$this->id_categoria = $this->categoria->getId();
-			$this->$produto = $produto;
+			$this->produto = $produto;
 			$this->descricao = $descricao;
 			$this->imagem_produto = $imagem_produto;
 			$this->preco = $preco;
