@@ -47,7 +47,7 @@
 				<input type="number" name="preco"></input><br/>
 				Quantidade:<br/>
 				<input type="number" name="quantidade"></input><br/>
-				<input type="submit" value= "Realizar cadastro da categoria"/><br/>
+				<input type="submit" value= "Realizar cadastro do produto"/><br/>
 			</form>
 
 				<a href = "main.php"> Voltar à tela inicial </a>
