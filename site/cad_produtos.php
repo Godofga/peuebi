@@ -15,14 +15,16 @@
     	}
 
       	checkLogin();
+      	if(isset($_FILES['arquivo']['name']))
+      		echo "sem erro";
+      	else 
+      		echo "com erro";
 
 				if(!checkRoot())
 					header('location:main.php');
 
-        else if(isset($_POST['categoria'])&&isset($_POST['nome'])&&isset($_POST['descricao'])&&isset($_POST['arquivo'])&&isset($_POST['preco'])&&isset($_POST['quantidade'])){
-        	$destino = 'imagens/' . $_FILES['arquivo']['name'];
-        	$arquivo_tmp = $_FILES['arquivo']['tmp_name'];
-			move_uploaded_file($arquivo_tmp, $destino);
+        else if(isset($_POST['categoria'])&&isset($_POST['nome'])&&isset($_POST['descricao'])&&isset($_FILES['arquivo']['name'])&&isset($_POST['preco'])&&isset($_POST['quantidade'])){
+          $destino = 'imagens/' . $_FILES['arquivo']['name'];
           $product = new produto($_POST['categoria'],$_POST['nome'],$_POST['descricao'],$destino,$_POST['preco'],$_POST['quantidade'] );	
           if($product->cadastrarProduto())
           	echo "feito";
