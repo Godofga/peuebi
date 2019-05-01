@@ -15,10 +15,6 @@
     	}
 
       	checkLogin();
-      	if(isset($_FILES['arquivo']['name']))
-      		echo "sem erro";
-      	else 
-      		echo "com erro";
 
 				if(!checkRoot())
 					header('location:main.php');
