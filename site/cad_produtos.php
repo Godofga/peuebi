@@ -19,9 +19,11 @@
 				if(!checkRoot())
 					header('location:main.php');
 
-        else if(isset($_POST['categoria'])&&isset($_POST['nome'])&&isset($_POST['descricao'])&&isset($_POST['imagem'])&&isset($_POST['preco'])&&isset($_POST['quantidade'])){
-        	$image = $_FILES['imagem']['name'];
-          $product = new produto($_POST['categoria'],$_POST['nome'],$_POST['descricao'],$image,$_POST['preco'],$_POST['quantidade'] );	
+        else if(isset($_POST['categoria'])&&isset($_POST['nome'])&&isset($_POST['descricao'])&&isset($_POST['arquivo'])&&isset($_POST['preco'])&&isset($_POST['quantidade'])){
+        	$destino = 'imagens/' . $_FILES['arquivo']['name'];
+        	$arquivo_tmp = $_FILES['arquivo']['tmp_name'];
+			move_uploaded_file($arquivo_tmp, $destino);
+          $product = new produto($_POST['categoria'],$_POST['nome'],$_POST['descricao'],$destino,$_POST['preco'],$_POST['quantidade'] );	
           if($product->cadastrarProduto())
           	echo "feito";
           else
@@ -34,15 +36,15 @@
 	<body>
 
 		<div>
-			<form action = "cad_produtos.php" method="POST">
-				Categoria:<br/>
+			<form action = "cad_produtos.php" method="POST" enctype="multipart/form-data">
+				Categoria:<br/>	
 				<input type="text" name="categoria"></input><br/>
 				Nome:<br/>
 				<input type="text" name="nome"></input><br/>
 				Descricao:<br/>
 				<input type="text" name="descricao"></input><br/>
 				Imagem:<br/>
-				<input type="file" name="imagem"></input><br/>
+				<input type="file" name="arquivo"></input><br/>
 				Preco:<br/>
 				<input type="number" name="preco"></input><br/>
 				Quantidade:<br/>
