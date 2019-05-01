@@ -167,7 +167,7 @@
 
 		function cadastrarProduto(){
 			if ($this->getId($this->produto)==0&&$this->categoria->getId()!=0){
-			$this->bancoDao->exeSql("INSERT INTO produto(id_categoria,produto,descricao,imagem_produto,preco,quantidade) VALUES ($this->id_categoria,'$this->produto','$this->descricao',null,$this->preco,$this->quantidade)");
+			$this->bancoDao->exeSql("INSERT INTO produto(id_categoria,produto,descricao,imagem_produto,preco,quantidade) VALUES ($this->id_categoria,'$this->produto','$this->descricao',$this->imagem_produto,$this->preco,$this->quantidade)");
 				return true;
 			} else return false;
 		}
