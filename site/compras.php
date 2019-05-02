@@ -27,7 +27,7 @@
 	<body>
 
 		<div>
-      <form action = <?php echo "cadastro.php?id=$_POST['id']" ?> method="POST">
+      <form action = `<?php echo "cadastro.php?id=$_POST['id']"; ?>` method="POST">
 
         Quantidade:<br/>
 				<input type="number" name="quantidade" value="digite a quantidade de itens"></input><br/>
