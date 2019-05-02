@@ -25,7 +25,7 @@
 
 		<table>
 			<tr>
-				<th>CATEGORIA</th>
+				<th>CATEGORIA</br></th>
 				<th>NOME</th>
 				<th>DESCRICAO</th>
 				<th>IMAGEM</th>
@@ -39,8 +39,8 @@
 				$resultado =$con->exeSql($query);
 				if($con->exeSql($query,true)){
 					while($row = $resultado->fetch_assoc()){
-						$aux = $row[`imagem_produto`];
-						echo "<tr><td>". $row["categoria"]."</td><td>".$row["nome"]."</td><td>".$row["descricao"]."</td><td>".<img src="$aux">."</td onclick='compras.php?id=$row["id"]'><td>". $row["preco"]."</td><td>".$row["quantidade"]."</td></tr>";
+						$aux = $row["imagem_produto"];
+						echo "<tr><td>". $row["categoria"]."</td><td>".$row["produto"]."</td><td>".$row["descricao"]."</td><td>"."<img src='$aux' alt='é para aparecer' height='100' width='100'>"."</td><td>". $row["preco"]."</td><td>".$row["quantidade"]."</td></tr>";
 					}
 
 				}
