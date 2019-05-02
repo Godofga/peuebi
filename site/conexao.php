@@ -265,7 +265,7 @@
 		{
 			$this->bancoDao = new conexaoDao();
 			$this->verificador = new verificar();
-			if($this->verificarUsuario($nome_usuario,$cpf)&&$this->verificador->validaCPF($cpf)){				
+			if($this->verificarUsuario($nome_usuario,$e_mail)&&$this->verificador->validaCPF($cpf)){				
 				$this->endereco = new endereco($estado,$cidade,$bairro);
 				$this->cpf = $cpf;
 				$this->id_endereco = $this->endereco->getId();
@@ -287,10 +287,10 @@
 				return false;
 		}
 
-		function verificarUsuario($nome_usuario,$cpf){
+		function verificarUsuario($nome_usuario,$e_mail){
 			if($this->bancoDao->exeSql("select * from usuario where nome_usuario = '$nome_usuario'",true))
 				return false;
-			else if($this->bancoDao->exeSql("select * from usuario where cpf = '$cpf'",true))
+			else if($this->bancoDao->exeSql("select * from usuario where e_mail = '$e_mail'",true))
 				return false;
 			else
 				return true;

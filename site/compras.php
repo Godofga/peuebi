@@ -27,7 +27,6 @@
             else
               echo "tente outro valor";    
         }
-        echo date('h:i:s');
 
       	checkLogin();
 
