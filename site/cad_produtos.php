@@ -20,12 +20,16 @@
 					header('location:main.php');
 
         else if(isset($_POST['categoria'])&&isset($_POST['nome'])&&isset($_POST['descricao'])&&isset($_FILES['arquivo']['name'])&&isset($_POST['preco'])&&isset($_POST['quantidade'])){
-          $destino = 'imagens/' . $_FILES['arquivo']['name'];
-          $product = new produto($_POST['categoria'],$_POST['nome'],$_POST['descricao'],$destino,$_POST['preco'],$_POST['quantidade'] );	
-          if($product->cadastrarProduto())
-          	echo "feito";
-          else
-          	echo "nao feito";
+
+			$imagem   = $_FILES['arquivo']['name'];
+			$tmp_name = $_FILES['arquivo']['tmp_name']; 
+			$pasta    = 'C:\xampp\htdocs\peuebi\site\imagens';
+			if(move_uploaded_file($tmp_name, $pasta.'/'.$imagem)){
+				$product = new produto($_POST['categoria'],$_POST['nome'],$_POST['descricao'],$imagem,$_POST['preco'],$_POST['quantidade'] );	
+	          	if($product->cadastrarProduto())
+	          	echo "feito";
+	      	} else
+          		echo "nao feito";          
 		}
     ?>
 
