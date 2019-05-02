@@ -68,12 +68,13 @@
 
 		<div>
 			<form action = "status.php" method="POST">
-				Id do pedido para alteração:<br/>
-				<input type="number" name="pedido"></input><br/>
-        		Novo estado do pedido:<br/>
-				<input type="checkbox" name="vehicle1"> validado<br>
-				<input type="checkbox" name="vehicle2"> invalidado<br>
-				<input type="checkbox" name="vehicle3"> poderia validar, mas não quero<br><br>
+				<br>
+				Id do pedido para alteração:<br/><br>
+				<input type="number" name="pedido"></input><br/><br>
+        		Novo estado do pedido:<br/><br>
+				<input type="radio" name="gender" value = "Aprovado"> Aprovar<br><br>
+				<input type="radio" name="gender" value = "Negado"> Negar<br>
+				<br>
 
 				<input type="submit" value= "Realizar alteração"/><br/>
 			</form>
