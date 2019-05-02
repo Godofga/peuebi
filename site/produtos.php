@@ -40,7 +40,7 @@
 				if($con->exeSql($query,true)){
 					while($row = $resultado->fetch_assoc()){
 						$aux = $row[`imagem_produto`];
-						echo "<tr><td>". $row["categoria"]."</td><td>".$row["nome"]."</td><td>".$row["descricao"]."</td><td>".`<img src="$aux">`."</td onclick='compras.php?id=$row["id"]'><td>". $row["preco"]."</td><td>".$row["quantidade"]."</td></tr>";
+						echo "<tr><td>". $row["categoria"]."</td><td>".$row["nome"]."</td><td>".$row["descricao"]."</td><td>".<img src="$aux">."</td onclick='compras.php?id=$row["id"]'><td>". $row["preco"]."</td><td>".$row["quantidade"]."</td></tr>";
 					}
 
 				}

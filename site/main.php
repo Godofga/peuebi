@@ -27,7 +27,7 @@
 						<a href = 'cad_categorias.php'> Cadastro de categorias </a> <br>
 						<a href = 'status.php'> Alterar status dos pedidos </a> <br>";
 					else
-						echo "<a href = 'compra.php'> Compra de produtos </a> <br>
+						echo "<a href = 'produtos.php'> Compra de produtos </a> <br>
 						<a href = 'historico.php'> Visualizar compras realizadas </a> <br>";
 				?>
 
