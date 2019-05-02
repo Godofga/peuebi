@@ -19,8 +19,10 @@
         if(!isset($_GET["id"]))
         {
           header('location:produtos.php');
-        } else
+        } else{
           echo $_GET['id'];
+          echo $_SESSION['usuario'];
+        }
 
       	checkLogin();
 
