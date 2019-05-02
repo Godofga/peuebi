@@ -4,7 +4,10 @@
 	<head>
 
 		<title> Cadastro - Prata Shop</title>
-		<meta charset="utf-8"/>
+		<meta charset="utf-8" name='viewport' content='width-device-width, initial-scale-1.0'/>
+		<link href='css/bootstrap.min.css' rel ='stylesheet' type='text/css'/>
+		<script type= 'text/javascript' src='js/jquery-3.4.1.min.js'></script>
+		<script type= 'text/javascript' src='js/bootstrap.min.js'></script>
 
     <?php
       require 'conexao.php';
@@ -14,7 +17,7 @@
           $user = new usuario($_POST['cpf'],$_POST['nome'],$_POST['email'],$_POST['usuario'],$_POST['senha'],0,$_POST['estado'],$_POST['cidade'],$_POST['bairro']);
           if($user->salvar())
           	echo 'Feito!<br>';
-          else 
+          else
           	echo "Não feito";
 
         }
