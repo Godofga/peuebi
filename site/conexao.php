@@ -205,7 +205,8 @@
 					$produto = $row["produto"];
 					$valor = $row["preco"];
 					$total = $valor*$this->quantidade;
-					if($row["quantidade"]<$this->quantidade) return false;
+					$ver = $row["quantidade"];
+					if($ver<$this->quantidade) return false;
 					$this->bancoDao->exeSql("insert into pedidoitens(id_produto, id_pedido, produto, quantidade, valor, total) values($this->id_produto, $this->id_pedido, '$produto',$this->quantidade,$valor, $total)");
 					return true;
 				}
