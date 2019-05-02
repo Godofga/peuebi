@@ -4,14 +4,17 @@
 	<head>
 
 		<title> Cadastro de produtos - Prata Shop</title>
-		<meta charset="utf-8"/>
+		<meta charset="utf-8" name='viewport' content='width-device-width, initial-scale-1.0'/>
+		<link href='css/bootstrap.min.css' rel ='stylesheet' type='text/css'/>
+		<script type= 'text/javascript' src='js/jquery-3.4.1.min.js'></script>
+		<script type= 'text/javascript' src='js/bootstrap.min.js'></script>
 
     <?php
       	require 'login.php';
 
-      	if(!isset($_SESSION)) 
-    	{ 
-        	session_start(); 
+      	if(!isset($_SESSION))
+    	{
+        	session_start();
     	}
 
       	checkLogin();
@@ -20,6 +23,7 @@
 					header('location:main.php');
 
         else if(isset($_POST['categoria'])&&isset($_POST['nome'])&&isset($_POST['descricao'])&&isset($_FILES['arquivo']['name'])&&isset($_POST['preco'])&&isset($_POST['quantidade'])){
+<<<<<<< HEAD
 
 			$imagem   = $_FILES['arquivo']['name'];
 			$tmp_name = $_FILES['arquivo']['tmp_name']; 
@@ -30,6 +34,14 @@
 	          	echo "feito";
 	      	} else
           		echo "nao feito";          
+=======
+          $destino = 'imagens/' . $_FILES['arquivo']['name'];
+          $product = new produto($_POST['categoria'],$_POST['nome'],$_POST['descricao'],$destino,$_POST['preco'],$_POST['quantidade'] );
+          if($product->cadastrarProduto())
+          	echo "feito";
+          else
+          	echo "nao feito";
+>>>>>>> ebda0438e448958ab4d8aa28f5e96f469e55306f
 		}
     ?>
 
@@ -39,7 +51,7 @@
 
 		<div>
 			<form action = "cad_produtos.php" method="POST" enctype="multipart/form-data">
-				Categoria:<br/>	
+				Categoria:<br/>
 				<input type="text" name="categoria"></input><br/>
 				Nome:<br/>
 				<input type="text" name="nome"></input><br/>
