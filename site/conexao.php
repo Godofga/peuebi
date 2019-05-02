@@ -191,6 +191,7 @@
 			$this->pedido = new pedido($nome_cliente);
 			$this->id_produto = $id_produto;
 			$this->id_pedido = $this->pedido->getId();
+			$this->quantidade = $quantidade;
 		}
 
 		function getIdProduto($produto){
@@ -227,7 +228,10 @@
 			$this->cpf_cliente = $this->verificarCpf($nome_cliente);
 			$this->situacao = "pendente";
 			date_default_timezone_set('America/Sao_Paulo');
-	  		$this->momento =  date('d/m/Y \à\s H:i:s');
+	  		$data = date('d/m/Y');
+			$hora = date('H:i:s');
+			$momento = $data.$hora;
+
 			if($this->verificarCpf($nome_cliente)!=0)
 			{
 				$this->cadastrarPedido($this->cpf_cliente,$this->momento,$this->situacao);
