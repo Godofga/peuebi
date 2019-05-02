@@ -33,11 +33,11 @@
 			<?php
 
 				$con = new conexaoDao();
-				$query = "SELECT * from pedidoitens inner ";
+				$query = "SELECT pedido.situacao, pedido.momento, pedidoitens.produto, pedidoitens.quantidade, pedidoitens.valor, pedidoitens.total from pedidoitens inner join pedido on(pedido.id=pedidoitens.id_pedido) inner join usuario on(pedido.cpf_cliente=usuario.cpf) where usuario.nome_usuario = '$_SESSION['usuario']'";
 				$resultado =$con->exeSql($query);
 				if($con->exeSql($query,true)){
 					while($row = $resultado->fetch_assoc()){
-						echo "<tr><td>". $row["id"]."</td><td>".$row["cpf_cliente"]."</td><td>".$row["momento"]."</td><td>".$row["situacao"]."</td></tr>";
+						echo "<tr><td>". $row["situacao"]."</td><td>".$row["momento"]."</td><td>".$row["produto"]."</td><td>". $row["quantidade"]."</td><td>". $row["valor"]."</td><td>".$row["total"]."</td></tr>";
 					}
 
 				}

@@ -41,7 +41,7 @@
 				Estado:<br/>
 				<input type="text" name= "estado"></input><br/>
     		    Cidade:<br/>
-				<input type="text" name="cidade"></input><br/>				
+				<input type="text" name="cidade"></input><br/>
 				Bairro:<br/>
 				<input type="text" name="bairro"></input><br/>
 

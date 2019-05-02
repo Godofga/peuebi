@@ -66,3 +66,4 @@ create table pedidoitens(
     valor float,
     total float
 );
+
