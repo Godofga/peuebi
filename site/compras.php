@@ -13,9 +13,14 @@
       	require 'login.php';
 
       	if(!isset($_SESSION))
-    	{
+    	   {
         	session_start();
-    	}
+    	   }
+        if(!isset($_GET["id"]))
+        {
+          header('location:produtos.php');
+        } else
+          echo $_GET["id"];
 
       	checkLogin();
 
@@ -25,27 +30,6 @@
 
 	<body>
 
-		<div>
-      <form action ="<?php echo "cadastro.php?id=$_POST['id']"; ?>" method="POST">
-
-        Quantidade:<br/>
-				<input type="number" name="quantidade" value="digite a quantidade de itens"></input><br/>
-				<input type="submit" value= "Realizar cadastro"/><br/>
-			</form>
-      <?php
-
-        $con = new conexaoDao();
-        $query = "SELECT * from produto inner join categoria on (categoria.id=produto.id_categoria) where produto.id = $_POST['id']";
-        $resultado =$con->exeSql($query);
-        if($con->exeSql($query,true)){
-          while($row = $resultado->fetch_assoc()){
-            $aux = $row[`imagem_produto`];
-            echo "<tr><td>". $row["categoria"]."</td><td>".$row["nome"]."</td><td>".$row["descricao"]."</td><td>".`<img src="$aux" onclick='compras.php'>`."</td><td>". $row["preco"]."</td><td>".$row["total"]."</td></tr>";
-          }
-
-        }
-
-       ?>
      </div>
 
 				<a href = "main.php"> Voltar à tela inicial </a>
