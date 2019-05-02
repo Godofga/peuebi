@@ -227,10 +227,8 @@
 			$this->bancoDao = new conexaoDao();
 			$this->cpf_cliente = $this->verificarCpf($nome_cliente);
 			$this->situacao = "pendente";
-			date_default_timezone_set('America/Sao_Paulo');
-	  		$data = date('d/m/Y');
-			$hora = date('H:i:s');
-			$momento = $data.$hora;
+			$date   = new DateTime();
+			$this->momento =  date_format($date,"Y/m/d H:i:s");
 
 			if($this->verificarCpf($nome_cliente)!=0)
 			{
