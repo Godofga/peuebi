@@ -28,16 +28,18 @@
 
 		<table>
 			<tr>
-				<th>ID</th>
-				<th>CPF</th>
-				<th>MOMENTO</th>
 				<th>SITUAÇÃO</th>
+				<th>MOMENTO</th>
+				<th>PRODUTO</th>
+				<th>QUANTIDADE</th>
+				<th>VALOR</th>
+				<th>TOTAL</th>
 			</tr>
 			<?php
 
 				$con = new conexaoDao();
 				$usuario = $_SESSION["usuario"];
-				$query = "SELECT pedido.situacao, pedido.momento, pedidoitens.produto, pedidoitens.quantidade, pedidoitens.valor, pedidoitens.total from pedidoitens inner join pedido on(pedido.id=pedidoitens.id_pedido) inner join usuario on(pedido.cpf_cliente=usuario.cpf) where usuario.nome_usuario = $usuario";
+				$query = "SELECT pedido.situacao, pedido.momento, pedidoitens.produto, pedidoitens.quantidade, pedidoitens.valor, pedidoitens.total from pedidoitens inner join pedido on(pedido.id=pedidoitens.id_pedido) inner join usuario on(pedido.cpf_cliente=usuario.cpf) where usuario.nome_usuario = '$usuario'";
 				$resultado =$con->exeSql($query);
 				if($con->exeSql($query,true)){
 					while($row = $resultado->fetch_assoc()){
