@@ -18,6 +18,17 @@
 #cadastroLink:hover{
   color:#5A5A5A;
 }
+#cadastroLinkblack{
+  color: #DCDCDC;
+  text-decoration: none;
+}
+#cadastroLinkblack:hover{
+  color:#C8C8C8;
+}
+.table{
+  background: white;
+  padding: 30px;
+}
 body {
     background-color: #323232;
 }

@@ -131,10 +131,12 @@
 
 		function salvar(){
 			$con = new conexaoDao();
-			if(!$con->exeSql("SELECT * FROM categoria where categoria = '$this->categoria'",true))
+			if(!$con->exeSql("SELECT * FROM categoria where categoria = '$this->categoria'",true)){
 				$con->exeSql("insert into categoria(categoria) values('$this->categoria')");
+				return true;
+			}
 			else
-				echo "categoria ja existente<br>";
+				return false;
 
 		}
 
@@ -161,7 +163,7 @@
 			$this->descricao = $descricao;
 			$this->imagem_produto = $imagem_produto;
 			$this->preco = $preco;
-			$this->quantidade = $quantidade;				
+			$this->quantidade = $quantidade;
 
 		}
 
@@ -211,9 +213,9 @@
 					$this->bancoDao->exeSql("insert into pedidoitens(id_produto, id_pedido, produto, quantidade, valor, total) values($this->id_produto, $this->id_pedido, '$produto',$this->quantidade,$valor, $total)");
 					return true;
 				}
-			} else 
+			} else
 				return false;
-			
+
 		}
 	}
 
@@ -265,7 +267,7 @@
 		{
 			$this->bancoDao = new conexaoDao();
 			$this->verificador = new verificar();
-			if($this->verificarUsuario($nome_usuario,$e_mail)&&$this->verificador->validaCPF($cpf)){				
+			if($this->verificarUsuario($nome_usuario,$e_mail)&&$this->verificador->validaCPF($cpf)){
 				$this->endereco = new endereco($estado,$cidade,$bairro);
 				$this->cpf = $cpf;
 				$this->id_endereco = $this->endereco->getId();
@@ -283,7 +285,7 @@
 				$this->bancoDao->exeSql("insert into usuario(cpf,id_endereco,nome_cliente,e_mail,nome_usuario,senha,root) values('$this->cpf',$this->id_endereco,'$this->nome','$this->e_mail','$this->nome_usuario','$this->senha',$this->root)");
 					$this->feito=false;
 				return true;
-			} else 
+			} else
 				return false;
 		}
 
@@ -426,30 +428,30 @@
 			// Elimina possivel mascara
 			$cpf = preg_replace("/[^0-9]/", "", $cpf);
 			$cpf = str_pad($cpf, 11, '0', STR_PAD_LEFT);
-			
-			// Verifica se o numero de digitos informados é igual a 11 
+
+			// Verifica se o numero de digitos informados é igual a 11
 			if (strlen($cpf) != 11) {
 				return false;
 			}
-			// Verifica se nenhuma das sequências invalidas abaixo 
+			// Verifica se nenhuma das sequências invalidas abaixo
 			// foi digitada. Caso afirmativo, retorna falso
-			else if ($cpf == '00000000000' || 
-				$cpf == '11111111111' || 
-				$cpf == '22222222222' || 
-				$cpf == '33333333333' || 
-				$cpf == '44444444444' || 
-				$cpf == '55555555555' || 
-				$cpf == '66666666666' || 
-				$cpf == '77777777777' || 
-				$cpf == '88888888888' || 
+			else if ($cpf == '00000000000' ||
+				$cpf == '11111111111' ||
+				$cpf == '22222222222' ||
+				$cpf == '33333333333' ||
+				$cpf == '44444444444' ||
+				$cpf == '55555555555' ||
+				$cpf == '66666666666' ||
+				$cpf == '77777777777' ||
+				$cpf == '88888888888' ||
 				$cpf == '99999999999') {
 				return false;
 			 // Calcula os digitos verificadores para verificar se o
 			 // CPF é válido
-			 } else {   
-				
+			 } else {
+
 				for ($t = 9; $t < 11; $t++) {
-					
+
 					for ($d = 0, $c = 0; $c < $t; $c++) {
 						$d += $cpf{$c} * (($t + 1) - $c);
 					}
