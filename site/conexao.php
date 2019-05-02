@@ -191,6 +191,7 @@
 			$this->pedido = new pedido($nome_cliente);
 			$this->id_produto = $id_produto;
 			$this->id_pedido = $this->pedido->getId();
+			$this->quantidade = $quantidade;
 		}
 
 		function getIdProduto($produto){
@@ -198,14 +199,15 @@
 		}
 
 		function cadastrarPedidoItens(){
-			$query = "SELECT produto from produto where id = $this->id_produto";
+			$query = "SELECT * from produto where id = $this->id_produto";
 			$resultado =$this->bancoDao->exeSql($query);
 			if($this->bancoDao->exeSql($query,true)){
 				while($row = $resultado->fetch_assoc()){
 					$produto = $row["produto"];
 					$valor = $row["preco"];
 					$total = $valor*$this->quantidade;
-					if($row["quantidade"]<$this->quantidade) return false;
+					$ver = $row["quantidade"];
+					if($ver<$this->quantidade) return false;
 					$this->bancoDao->exeSql("insert into pedidoitens(id_produto, id_pedido, produto, quantidade, valor, total) values($this->id_produto, $this->id_pedido, '$produto',$this->quantidade,$valor, $total)");
 					return true;
 				}
@@ -226,10 +228,13 @@
 			$this->cpf_cliente = $this->verificarCpf($nome_cliente);
 			$this->situacao = "pendente";
 			date_default_timezone_set('America/Sao_Paulo');
-	  		$this->momento =  date('d/m/Y \à\s H:i:s');
-			if($this->verificarCpf!=0)
+	  		$data = date('d/m/Y');
+			$hora = date('H:i:s');
+			$momento = $data.$hora;
+
+			if($this->verificarCpf($nome_cliente)!=0)
 			{
-				$this->cadastrarPedido($this->nome_cliente,$this->momento,$this->situacao);
+				$this->cadastrarPedido($this->cpf_cliente,$this->momento,$this->situacao);
 			}
 		}
 		function getId(){
