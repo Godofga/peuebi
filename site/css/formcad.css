@@ -1,6 +1,6 @@
 .form-container{
   position:absolute;
-  top: 15vh;
+  top: 4vh;
   background: #fff;
   padding: 30px;
   border-radius: 10px;
@@ -15,6 +15,7 @@
   color: #323232;
   text-decoration: none;
 }
+
 #cadastroLink:hover{
   color:#5A5A5A;
 }

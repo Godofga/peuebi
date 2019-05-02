@@ -6,7 +6,7 @@
 		<title> Cadastro - Prata Shop</title>
 		<meta charset="utf-8" name='viewport' content='width-device-width, initial-scale-1.0'/>
 		<link href='css/bootstrap.min.css' rel ='stylesheet' type='text/css'/>
-		<link rel ='stylesheet' type='text/css' href='css/form.css'>
+		<link rel ='stylesheet' type='text/css' href='css/formcad.css'>
 		<script type= 'text/javascript' src='js/jquery-3.4.1.min.js'></script>
 		<script type= 'text/javascript' src='js/bootstrap.min.js'></script>
 
@@ -19,7 +19,6 @@
 
 		<section class = "container-fluid">
 			<section class= "row justify-content-center">
-				<section class="col-l2 col-sm-6 col-md-3">
 					<form class='form-container' action="cadastro.php" method="POST">
 					  <div class="form-group">
 					    <label for="nome">Nome</label>
@@ -79,7 +78,6 @@
 						<a href = "index.php" class="alert-link" id="cadastroLink"> Voltar à tela de login </a>
 					</form>
 				</section>
-			</section>
 		</section>
 
 
