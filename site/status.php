@@ -54,7 +54,7 @@
 			<?php
 
 				$con = new conexaoDao();
-				$query = "SELECT * from pedido";
+				$query = "SELECT * from pedido where situacao = 'pendente'";
 				$resultado =$con->exeSql($query);
 				if($con->exeSql($query,true)){
 					while($row = $resultado->fetch_assoc()){
@@ -70,8 +70,10 @@
 			<form action = "status.php" method="POST">
 				Id do pedido para alteração:<br/>
 				<input type="number" name="pedido"></input><br/>
-        Novo estado do pedido:<br/>
-				<input type="text" name="estado"></input><br/>
+        		Novo estado do pedido:<br/>
+				<input type="checkbox" name="vehicle1"> validado<br>
+				<input type="checkbox" name="vehicle2"> invalidado<br>
+				<input type="checkbox" name="vehicle3"> poderia validar, mas não quero<br><br>
 
 				<input type="submit" value= "Realizar alteração"/><br/>
 			</form>
