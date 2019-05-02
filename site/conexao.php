@@ -228,7 +228,7 @@
 			$this->cpf_cliente = $this->verificarCpf($nome_cliente);
 			$this->situacao = "pendente";
 			$date   = new DateTime();
-			$this->momento =  date_format($date,"Y/m/d H:i:s");
+			$this->momento =  date_format($date,"Y-m-d-H-i-s");
 
 			if($this->verificarCpf($nome_cliente)!=0)
 			{
