@@ -25,7 +25,6 @@
 
 		<section class = "container-fluid">
 			<section class= "row justify-content-center">
-				<section class="col-l2 col-sm-6 col-md-3">
 					<form class='form-container' action="login.php?do=true" method="POST">
 					  <div class="form-group">
 					    <label for="user">Usuário</label>
@@ -47,7 +46,6 @@
 						<a href = "cadastro.php" class="alert-link" id="cadastroLink"> Cadastrar-se </a>
 					</form>
 				</section>
-			</section>
 		</section>
 
 	</body>
