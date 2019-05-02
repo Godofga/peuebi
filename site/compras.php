@@ -3,7 +3,7 @@
 
 	<head>
 
-		<title> Cadastro de produtos - Prata Shop</title>
+		<title> Compra de produtos - Prata Shop</title>
 		<meta charset="utf-8" name='viewport' content='width-device-width, initial-scale-1.0'/>
 		<link href='css/bootstrap.min.css' rel ='stylesheet' type='text/css'/>
 		<script type= 'text/javascript' src='js/jquery-3.4.1.min.js'></script>
@@ -13,45 +13,37 @@
       	require 'login.php';
 
       	if(!isset($_SESSION))
-    	{
+    	   {
         	session_start();
-    	}
+    	   }
+        if(!isset($_GET["id"]))
+        {
+          header('location:produtos.php');
+        } else{
+          echo $_GET['id'];
+          echo $_SESSION['usuario'];
+        }
 
       	checkLogin();
 
-        if(!isset($_POST['id']))
-    	{
-        	header('location:produtos.php');
-    	}
     ?>
 
 	</head>
 
 	<body>
 
-		<div>
-      <form action = `<?php echo "cadastro.php?id=$_POST['id']"; ?>` method="POST">
-
-        Quantidade:<br/>
-				<input type="number" name="quantidade" value="digite a quantidade de itens"></input><br/>
-				<input type="submit" value= "Realizar cadastro"/><br/>
-			</form>
-      <?php
-
-        $con = new conexaoDao();
-        $query = "SELECT * from produto inner join categoria on (categoria.id=produto.id_categoria) where produto.id = $_POST['id']";
-        $resultado =$con->exeSql($query);
-        if($con->exeSql($query,true)){
-          while($row = $resultado->fetch_assoc()){
-            $aux = $row[`imagem_produto`];
-            echo "<tr><td>". $row["categoria"]."</td><td>".$row["nome"]."</td><td>".$row["descricao"]."</td><td>".`<img src="$aux">`."</td onclick='compras.php'><td>". $row["preco"]."</td><td>".$row["total"]."</td></tr>";
-          }
-
-        }
-
-       ?>
      </div>
+        <form action="compras.php?id=<?php echo $_GET["id"]?>" method="POST">
 
+          Quantidade:<br/>
+          <input type="number" name="quantidade"></input><br/>
+          <input type="submit" value= "Realizar compra"/><br/>
+        </form>
+
+        <?php
+          if(isset($_GET['log']) && $_GET['log'])
+            echo "Usuário ou senha incorreta <br>";
+        ?>
 				<a href = "main.php"> Voltar à tela inicial </a>
 		</div>
 
