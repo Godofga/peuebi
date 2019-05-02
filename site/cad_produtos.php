@@ -23,7 +23,6 @@
 					header('location:main.php');
 
         else if(isset($_POST['categoria'])&&isset($_POST['nome'])&&isset($_POST['descricao'])&&isset($_FILES['arquivo']['name'])&&isset($_POST['preco'])&&isset($_POST['quantidade'])){
-<<<<<<< HEAD
 
 			$imagem   = $_FILES['arquivo']['name'];
 			$tmp_name = $_FILES['arquivo']['tmp_name']; 
@@ -34,14 +33,12 @@
 	          	echo "feito";
 	      	} else
           		echo "nao feito";          
-=======
           $destino = 'imagens/' . $_FILES['arquivo']['name'];
           $product = new produto($_POST['categoria'],$_POST['nome'],$_POST['descricao'],$destino,$_POST['preco'],$_POST['quantidade'] );
           if($product->cadastrarProduto())
           	echo "feito";
           else
           	echo "nao feito";
->>>>>>> ebda0438e448958ab4d8aa28f5e96f469e55306f
 		}
     ?>
 
