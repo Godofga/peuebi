@@ -190,6 +190,7 @@
 			$this->bancoDao = new conexaoDao();
 			$this->pedido = new pedido($nome_cliente);
 			$this->id_produto = $id_produto;
+			$this->id_pedido = $this->pedido->getId();
 		}
 
 		function getIdProduto($produto){
@@ -198,15 +199,16 @@
 
 		function cadastrarPedidoItens(){
 			$query = "SELECT produto from produto where id = $this->id_produto";
-			$resultado =$bancoDao->exeSql($query);
-			if($con->exeSql($query,true)){
+			$resultado =$this->bancoDao->exeSql($query);
+			if($this->bancoDao->exeSql($query,true)){
 				while($row = $resultado->fetch_assoc()){
 					$produto = $row["produto"];
 					$valor = $row["preco"];
 					$total = $valor*$this->quantidade;
 					if($row["quantidade"]<$this->quantidade) return false;
-					$this->bancoDao->exeSql("insert into pedidoitens(id_produto, id_pedido, produto, quantidade, valor, total) values($this->id_produto, $this->pedido->getId(), '$produto',$this->quantidade,$valor, $total)");
+					$this->bancoDao->exeSql("insert into pedidoitens(id_produto, id_pedido, produto, quantidade, valor, total) values($this->id_produto, $this->id_pedido, '$produto',$this->quantidade,$valor, $total)");
 					return true;
+				}
 			} else 
 				return false;
 			

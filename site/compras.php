@@ -19,9 +19,12 @@
         if(!isset($_GET["id"]))
         {
           header('location:produtos.php');
-        } else{
-          echo $_GET['id'];
-          echo $_SESSION['usuario'];
+        } else if(isset($_GET["id"])&&isset($_POST['quantidade'])){
+            $produtos = new pedidoitens($_SESSION["usuario"],$_POST["quantidade"],$_GET["id"]);
+            if($produtos->cadastrarPedidoItens())
+              echo "feito";
+            else
+              echo "tente outro valor";    
         }
 
       	checkLogin();
@@ -39,11 +42,6 @@
           <input type="number" name="quantidade"></input><br/>
           <input type="submit" value= "Realizar compra"/><br/>
         </form>
-
-        <?php
-          if(isset($_GET['log']) && $_GET['log'])
-            echo "Usuário ou senha incorreta <br>";
-        ?>
 				<a href = "main.php"> Voltar à tela inicial </a>
 		</div>
 
