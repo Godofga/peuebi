@@ -38,7 +38,7 @@
 			<?php
 
 				$con = new conexaoDao();
-				$query = "SELECT * from produto inner join categoria on (categoria.id=produto.id_categoria)";
+				$query = "SELECT produto.*, categoria.categoria from produto inner join categoria on (categoria.id=produto.id_categoria)";
 				$resultado =$con->exeSql($query);
 				if($con->exeSql($query,true)){
 					while($row = $resultado->fetch_assoc()){
