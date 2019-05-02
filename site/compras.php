@@ -19,10 +19,6 @@
 
       	checkLogin();
 
-        if(!isset($_POST['id']))
-    	{
-        	header('location:produtos.php');
-    	}
     ?>
 
 	</head>
@@ -44,7 +40,7 @@
         if($con->exeSql($query,true)){
           while($row = $resultado->fetch_assoc()){
             $aux = $row[`imagem_produto`];
-            echo "<tr><td>". $row["categoria"]."</td><td>".$row["nome"]."</td><td>".$row["descricao"]."</td><td>".`<img src="$aux">`."</td onclick='compras.php'><td>". $row["preco"]."</td><td>".$row["total"]."</td></tr>";
+            echo "<tr><td>". $row["categoria"]."</td><td>".$row["nome"]."</td><td>".$row["descricao"]."</td><td>".`<img src="$aux" onclick='compras.php'>`."</td><td>". $row["preco"]."</td><td>".$row["total"]."</td></tr>";
           }
 
         }
