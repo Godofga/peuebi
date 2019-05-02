@@ -3,7 +3,7 @@
 
 	<head>
 
-		<title> Alteração de status - Prata Shop</title>
+		<title> Histórico - Prata Shop</title>
 		<meta charset="utf-8" name='viewport' content='width-device-width, initial-scale-1.0'/>
 		<link href='css/bootstrap.min.css' rel ='stylesheet' type='text/css'/>
 		<script type= 'text/javascript' src='js/jquery-3.4.1.min.js'></script>
@@ -36,7 +36,8 @@
 			<?php
 
 				$con = new conexaoDao();
-				$query = "SELECT pedido.situacao, pedido.momento, pedidoitens.produto, pedidoitens.quantidade, pedidoitens.valor, pedidoitens.total from pedidoitens inner join pedido on(pedido.id=pedidoitens.id_pedido) inner join usuario on(pedido.cpf_cliente=usuario.cpf) where usuario.nome_usuario = '$_SESSION['usuario']'";
+				$usuario = $_SESSION["usuario"];
+				$query = "SELECT pedido.situacao, pedido.momento, pedidoitens.produto, pedidoitens.quantidade, pedidoitens.valor, pedidoitens.total from pedidoitens inner join pedido on(pedido.id=pedidoitens.id_pedido) inner join usuario on(pedido.cpf_cliente=usuario.cpf) where usuario.nome_usuario = $usuario";
 				$resultado =$con->exeSql($query);
 				if($con->exeSql($query,true)){
 					while($row = $resultado->fetch_assoc()){
