@@ -198,7 +198,7 @@
 		}
 
 		function cadastrarPedidoItens(){
-			$query = "SELECT produto from produto where id = $this->id_produto";
+			$query = "SELECT * from produto where id = $this->id_produto";
 			$resultado =$this->bancoDao->exeSql($query);
 			if($this->bancoDao->exeSql($query,true)){
 				while($row = $resultado->fetch_assoc()){
@@ -228,9 +228,9 @@
 			$this->situacao = "pendente";
 			date_default_timezone_set('America/Sao_Paulo');
 	  		$this->momento =  date('d/m/Y \à\s H:i:s');
-			if($this->verificarCpf!=0)
+			if($this->verificarCpf($nome_cliente)!=0)
 			{
-				$this->cadastrarPedido($this->nome_cliente,$this->momento,$this->situacao);
+				$this->cadastrarPedido($this->cpf_cliente,$this->momento,$this->situacao);
 			}
 		}
 		function getId(){
