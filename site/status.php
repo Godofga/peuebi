@@ -80,7 +80,8 @@
 						<br>
 						<?php
 
-						if(isset($_POST['pedido']) && isset($_POST['gender'])){$con = new conexaoDao();
+						if(isset($_POST['pedido']) && isset($_POST['gender'])){
+							$con = new conexaoDao();
 						$id = $_POST['pedido'];
 						$status = $_POST['gender'];
 						$quant1;
@@ -89,10 +90,10 @@
 	inner join produto on(produto.id = pedidoitens.id_produto) where pedido.id = $id";
 						$result = $con->exeSql($queri,true);
 						while($row = $result->fetch_assoc()){
-							$quant1 = $row["produto.quantidade"];
-							$quant2 = $row["pedidoitens.quantidade"];
+							$this->quant1 = $row["produto.quantidade"];
+							$this->quant2 = $row["pedidoitens.quantidade"];
 						}
-						if($quant1>=$quant2){
+						if($this->quant1>=$this->quant2){
 							if($con->exeSql("select * from pedido where id = $id",true)){
 								$con->exeSql("update pedido set situacao = '$status' where id = $id");
 		          	echo 'Feito!<br/>';
