@@ -35,11 +35,11 @@ inner join produto on(produto.id = pedidoitens.id_produto) where pedido.id = $id
 					$resultado =$con->exeSql($queri);
 					if($con->exeSql($queri,true)){
 						while($row = $resultado->fetch_assoc()){
-							$this->quant1 = $row["pedido.quantidade"];
-							$this->quant2 = $row["pedidoitens.quantidade"];
+							$quant1 = $row["produto.quantidade"];
+							$quant2 = $row["pedidoitens.quantidade"];
 						}
 					}
-					if($this->quant1>=$this->quant2){
+					if($quant1>=$quant2){
 						if($con->exeSql("select * from pedido where id = $id",true)){
 							$con->exeSql("update pedido set situacao = '$status' where id = $id");
 							echo 'Feito!<br/>';
@@ -106,15 +106,6 @@ inner join produto on(produto.id = pedidoitens.id_produto) where pedido.id = $id
 						</div>
 						<br>
 						<br>
-						<?php
-
-
-
-
-
-
-
-						?>
 
 						<button type="submit" class="btn btn-outline-dark btn-block">Realizar alteração</button><br>
 						<a href = "main.php" class="alert-link" id="cadastroLink"> Retornar à tela inicial </a>
