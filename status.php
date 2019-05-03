@@ -23,7 +23,56 @@
 
     		if(!checkRoot()){
     			header('location:main.php');
-				}
+				} else if(isset($_POST['pedido']) && isset($_POST['gender'])){
+
+						$con = new conexaoDao();
+						$id = $_POST['pedido'];
+						$status = $_POST['gender'];
+						if($_POST['gender']!="Negado"){
+							$quant1;
+							$quant2;
+							$ide;
+							$queri = "select produto.id,produto.quantidade, pedidoitens.quantidade 'arroz' from pedido inner join pedidoitens on (pedido.id = pedidoitens.id_pedido)
+								inner join produto on(produto.id = pedidoitens.id_produto) where pedido.id = $id";
+							$resultado =$con->exeSql($queri);
+							if($con->exeSql($queri,true)){
+								while($row = $resultado->fetch_assoc()){
+									$quant1 = $row["quantidade"];
+									$quant2 = $row["arroz"];
+									$ide = $row["id"];
+								}
+							}
+							if($quant1>=$quant2){
+								if($con->exeSql("select * from pedido where id = $id",true)){
+									$total = $quant1-$quant2;
+									$con->exeSql("update pedido set situacao = '$status' where id = $id");
+									$con->exeSql("update produto set quantidade = $total where id = $ide");
+									echo "
+										<div class='alert alert-success' role='alert'>
+											Mudança efetuada!
+										</div>";
+								}
+								else {
+									echo "
+										<div class='alert alert-warning' role='alert'>
+											O id não existe!
+										</div>";
+								}
+							} else
+							echo "
+								<div class='alert alert-warning' role='alert'>
+									Quantidade limite ultrapassada!
+								</div>";
+							} else
+							if($con->exeSql("select * from pedido where id = $id",true)){
+								$con->exeSql("update pedido set situacao = '$status' where id = $id");
+								echo "
+									<div class='alert alert-success' role='alert'>
+										Mudança efetuada!
+									</div>";
+							}
+					}
+
 
     ?>
 
@@ -76,51 +125,7 @@
 						</div>
 						<br>
 						<br>
-						<?php
-
-						if(isset($_POST['pedido']) && isset($_POST['gender'])){
-							$con = new conexaoDao();
-							$id = $_POST['pedido'];
-							$status = $_POST['gender'];
-							$quant1;
-							$quant2;
-							$ide;
-							$queri = "select produto.id,produto.quantidade, pedidoitens.quantidade 'arroz' from pedido inner join pedidoitens on (pedido.id = pedidoitens.id_pedido)
-								inner join produto on(produto.id = pedidoitens.id_produto) where pedido.id = $id";
-							$resultado =$con->exeSql($queri);
-							if($con->exeSql($queri,true)){
-								while($row = $resultado->fetch_assoc()){
-									$quant1 = $row["quantidade"];
-									$quant2 = $row["arroz"];
-									$ide = $row["id"];
-								}
-							}
-							if($quant1>=$quant2){
-								if($con->exeSql("select * from pedido where id = $id",true)){
-									$total = $quant1-$quant2;
-									$con->exeSql("update pedido set situacao = '$status' where id = $id");
-									$con->exeSql("update produto set quantidade = $total where id = $ide");
-									echo "
-										<div class='alert alert-success' role='alert'>
-											Mudança efetuada!
-										</div>";
-								}
-								else {
-									echo "
-										<div class='alert alert-warning' role='alert'>
-											O id não existe!
-										</div>";
-								}
-							} else
-							echo "
-								<div class='alert alert-warning' role='alert'>
-									Quantidade limite ultrapassada!
-								</div>";
-
-						}
-
-						 ?>
-
+						
 						<button type="submit" class="btn btn-outline-dark btn-block">Realizar alteração</button><br>
 						<a href = "main.php" class="alert-link" id="cadastroLink"> Retornar à tela inicial </a>
 					</form>

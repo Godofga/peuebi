@@ -63,32 +63,24 @@
 
 								$imagem   = $_FILES['arquivo']['name'];
 								$tmp_name = $_FILES['arquivo']['tmp_name'];
-								$pasta    = 'C:\xampp\htdocs\peuebi\site\imagens';
+								$pasta    = 'C:\xampp\htdocs\peuebi\imagens';
 								if(move_uploaded_file($tmp_name, $pasta.'/'.$imagem)){
 									$product = new produto($_POST['categoria'],$_POST['nome'],$_POST['descricao'],$imagem,$_POST['preco'],$_POST['quantidade'] );
-												if($product->cadastrarProduto())
-												echo "
-													<div class='alert alert-success' role='alert'>
-														Produto cadastrado!
-													</div>";
-										} else
-												echo "
-													<div class='alert alert-warning' role='alert'>
-														Algo de errado ocorreu!
-													</div>";
-										$destino = 'imagens/' . $_FILES['arquivo']['name'];
-										$product = new produto($_POST['categoria'],$_POST['nome'],$_POST['descricao'],$destino,$_POST['preco'],$_POST['quantidade'] );
-										if($product->cadastrarProduto())
+										if($product->cadastrarProduto()){
+											$destino = 'imagens/' . $_FILES['arquivo']['name'];
+											$product = new produto($_POST['categoria'],$_POST['nome'],$_POST['descricao'],$destino,$_POST['preco'],$_POST['quantidade'] );
 											echo "
 												<div class='alert alert-success' role='alert'>
 													Produto cadastrado!
 												</div>";
-										else
-											echo "
-												<div class='alert alert-warning' role='alert'>
-													Algo de errado ocorreu!
-												</div>";
+										} else
+										echo "
+										<div class='alert alert-warning' role='alert'>
+											Algo de errado ocorreu!
+										</div>";
+								}
 							}
+
 						?>
 
 						<button type="submit" class="btn btn-outline-dark btn-block">Cadastrar produto</button><br>
