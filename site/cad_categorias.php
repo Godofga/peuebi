@@ -6,7 +6,7 @@
 		<title> Cadastro de categorias - Prata Shop</title>
 		<meta charset="utf-8" name='viewport' content='width-device-width, initial-scale-1.0'/>
 		<link href='css/bootstrap.min.css' rel ='stylesheet' type='text/css'/>
-		<link rel ='stylesheet' type='text/css' href='css/form.css'>
+		<link rel ='stylesheet' type='text/css' href='css/formmenu.css'>
 		<script type= 'text/javascript' src='js/jquery-3.4.1.min.js'></script>
 		<script type= 'text/javascript' src='js/bootstrap.min.js'></script>
 
@@ -63,7 +63,7 @@
 						?>
 
 						<button type="submit" class="btn btn-outline-dark btn-block">Cadastrar categoria</button><br>
-						<a href = "index.php" class="alert-link" id="cadastroLink"> Voltar à tela inicial </a>
+						<a href = "main.php" class="alert-link" id="cadastroLink"> Voltar à tela inicial </a>
 					</form>
 				</section>
 		</section>
