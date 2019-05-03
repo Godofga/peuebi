@@ -196,9 +196,6 @@
 			$this->quantidade = $quantidade;
 		}
 
-		function getIdProduto($produto){
-			return $this->bancoDao->returnIdSql("select produto.id from produto where produto = '$produto'");
-		}
 
 		function cadastrarPedidoItens(){
 			$query = "SELECT * from produto where id = $this->id_produto";
