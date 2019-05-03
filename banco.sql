@@ -52,7 +52,7 @@ create table pedido(
 	id int not null primary key auto_increment,
     cpf_cliente varchar(45),
     foreign key (cpf_cliente) references usuario (cpf),
-    momento date,
+    momento varchar(200),
     situacao varchar(45)
 );
 create table pedidoitens(
