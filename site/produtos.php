@@ -27,10 +27,6 @@
 
 	<body>
 
-
-
-
-
 		<section class = "container-fluid">
 			<section class= "row justify-content-center">
 
@@ -60,23 +56,9 @@
 
 						 ?>
 				</table>
-						<a href = "index.php" class="alert-link" id="cadastroLinkblack"> Voltar à tela inicial </a>
+						<a href = "main.php" class="alert-link" id="cadastroLinkblack"> Voltar à tela inicial </a>
 				</section>
 		</section>
-
-
-
-
-
-
-
-
-
-
-
-		<div class="container">
-
-</div>
 
 
 </html>

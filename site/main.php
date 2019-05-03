@@ -35,10 +35,9 @@
 								<a href = 'cad_categorias.php' class='alert-link' id='cadastroLink'> Cadastro de categorias </a> <br>
 								<a href = 'status.php' class='alert-link' id='cadastroLink'> Alterar status dos pedidos </a> <br>";
 							else
-								echo "<a href = 'compras.php' class='alert-link' id='cadastroLink'> Compra de produtos </a> <br>
-								<a href = 'historico.php' class='alert-link' id='cadastroLink'> Visualizar compras realizadas </a> <br>";
+								echo "<a href = 'historico.php' class='alert-link' id='cadastroLink'> Visualizar compras realizadas </a> <br>";
 						?>
-						<a href = "produtos.php" class="alert-link" id="cadastroLink"> Produtos</a> <br>
+						<a href = 'produtos.php' class='alert-link' id='cadastroLink'> Compra de produtos </a> <br>
 						<a href = "login.php?exits=true" class="alert-link" id="cadastroLink"> Sair da sessão</a> <br>
 					</form>
 				</section>
