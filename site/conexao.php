@@ -196,9 +196,6 @@
 			$this->quantidade = $quantidade;
 		}
 
-		function getIdProduto($produto){
-			return $this->bancoDao->returnIdSql("select produto.id from produto where produto = '$produto'");
-		}
 
 		function cadastrarPedidoItens(){
 			$query = "SELECT * from produto where id = $this->id_produto";
@@ -238,7 +235,7 @@
 			}
 		}
 		function getId(){
-			return $this->bancoDao->returnIdSql("select pedido.id from pedido where cpf_cliente='$this->cpf_cliente'");
+			return $this->bancoDao->returnIdSql("select pedido.id from pedido where momento='$this->momento'");
 		}
 		function verificarCpf($nome_cliente){
 			$comando = "select * from usuario where nome_usuario= '$nome_cliente' ";
