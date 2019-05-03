@@ -35,20 +35,36 @@
 									<label for="quantidade">Quantidade</label>
 									<input type="text" class="form-control" id="quantidade" name="quantidade" placeholder="Unidades do produtos">
 								</div>
+								<div class="btn-group btn-group-toggle" data-toggle="buttons">
+								  <label class="btn btn-secondary">
+								    <input type="radio" name="gender" id="option1" autocomplete="off" value = "Aprovado"> Cartão
+								  </label>
+								  <label class="btn btn-secondary">
+								    <input type="radio" name="gender" id="option2" autocomplete="off" value = "Negado"> Boleto
+								  </label>
+								</div>
 
 
 								<?php
-									if(isset($_GET["id"])&&isset($_POST['quantidade'])){
+									if(isset($_GET["id"])&&isset($_POST['quantidade'])&&isset($_POST['gender'])){
 											$produtos = new pedidoitens($_SESSION["usuario"],$_POST["quantidade"],$_GET["id"]);
-											if($produtos->cadastrarPedidoItens())
+											if($produtos->cadastrarPedidoItens()){
+												if($_POST['gender']=='Aprovado')
 												echo "
 													<div class='alert alert-success' role='alert'>
-														Pedido efetuado!
+														Pedido via cartão efetuado!
 													</div>";
+												else {
+													echo "
+														<div class='alert alert-success' role='alert'>
+															Pedido via boleto efetuado!
+														</div>";
+													}
+												}
 											else
 												echo "
 													<div class='alert alert-warning' role='alert'>
-														Tente outro valor
+														Tente outro valor!
 													</div>";
 									}
 
