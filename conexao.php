@@ -169,7 +169,7 @@
 
 		function cadastrarProduto(){
 			if ($this->getId($this->produto)==0&&$this->categoria->getId()!=0){
-			$this->bancoDao->exeSql("INSERT INTO produto(id_categoria,produto,descricao,imagem_produto,preco,quantidade) VALUES ($this->id_categoria,'$this->produto','$this->descricao','$this->imagem_produto',$this->preco,$this->quantidade)");
+				$this->bancoDao->exeSql("INSERT INTO produto(id_categoria,produto,descricao,imagem_produto,preco,quantidade) VALUES ($this->id_categoria,'$this->produto','$this->descricao','$this->imagem_produto',$this->preco,$this->quantidade)");
 				return true;
 			} else return false;
 		}
@@ -201,7 +201,7 @@
 			$query = "SELECT * from produto where id = $this->id_produto";
 			$resultado =$this->bancoDao->exeSql($query);
 			if($this->bancoDao->exeSql($query,true)){
-				while($row = $resultado->fetch_assoc()){
+					while($row = $resultado->fetch_assoc()){
 					$produto = $row["produto"];
 					$valor = $row["preco"];
 					$total = $valor*$this->quantidade;
@@ -279,11 +279,11 @@
 
 		function salvar(){// SE LEMBRAR DE MUDAR O NULL PARA O ID DO ENDEREÇO PROPRIAMENTE!!!!
 			if($this->feito){
-				$this->bancoDao->exeSql("insert into usuario(cpf,id_endereco,nome_cliente,e_mail,nome_usuario,senha,root) values('$this->cpf',$this->id_endereco,'$this->nome','$this->e_mail','$this->nome_usuario','$this->senha',$this->root)");
+					$this->bancoDao->exeSql("insert into usuario(cpf,id_endereco,nome_cliente,e_mail,nome_usuario,senha,root) values('$this->cpf',$this->id_endereco,'$this->nome','$this->e_mail','$this->nome_usuario','$this->senha',$this->root)");
 					$this->feito=false;
-				return true;
+					return true;
 			} else
-				return false;
+					return false;
 		}
 
 		function verificarUsuario($nome_usuario,$e_mail){

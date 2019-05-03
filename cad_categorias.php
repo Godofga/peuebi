@@ -14,18 +14,14 @@
       	require 'login.php';
 
 				if(!isset($_SESSION))
-    	{
+    		{
         	session_start();
-    	}
+    		}
 
       	checkLogin();
 
-		if(!checkRoot())
-			header('location:main.php');
-
-
-
-
+				if(!checkRoot())
+					header('location:main.php');
     ?>
 
 	</head>

@@ -25,12 +25,6 @@
     			header('location:main.php');
 				}
 
-
-
-
-
-
-
     ?>
 
 	</head>
@@ -92,7 +86,7 @@
 							$quant2;
 							$ide;
 							$queri = "select produto.id,produto.quantidade, pedidoitens.quantidade 'arroz' from pedido inner join pedidoitens on (pedido.id = pedidoitens.id_pedido)
-		inner join produto on(produto.id = pedidoitens.id_produto) where pedido.id = $id";
+								inner join produto on(produto.id = pedidoitens.id_produto) where pedido.id = $id";
 							$resultado =$con->exeSql($queri);
 							if($con->exeSql($queri,true)){
 								while($row = $resultado->fetch_assoc()){
@@ -124,10 +118,6 @@
 								</div>";
 
 						}
-
-
-
-
 
 						 ?>
 
