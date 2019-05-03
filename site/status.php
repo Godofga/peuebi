@@ -25,7 +25,7 @@
     			header('location:main.php');
 
 
-        else if(isset($_POST['pedido']) && isset($_POST['gender'])){
+        if(isset($_POST['pedido']) && isset($_POST['gender'])){
 
           $con = new conexaoDao();
 					$id = $_POST['pedido'];
@@ -72,7 +72,6 @@
 
 					 ?>
 				</table>
-						<a href = "main.php" class="alert-link" id="cadastroLinkblack"> Voltar à tela inicial </a>
 				</section>
 		</section>
 
@@ -92,14 +91,37 @@
 						  </label>
 						</div>
 						<br>
+						<br>
 						<?php
-							if(isset($_GET['log']) && $_GET['log'])
+
+						if(isset($_POST['pedido']) && isset($_POST['gender'])){
+
+		          $con = new conexaoDao();
+							$id = $_POST['pedido'];
+							$status = $_POST['gender'];
+
+							if($con->exeSql("select * from pedido where id = $id",true)){
+								$con->exeSql("update pedido set situacao = '$status' where id = $id");
+		          	echo "
+									<div class='alert alert-success' role='alert'>
+										Feito!
+									</div>";
+							}
+							else {
 								echo "
 									<div class='alert alert-danger' role='alert'>
-										Usuário ou senha incorreta!
+										Id inexistente!
 									</div>";
+							}
+
+		        }
+
+
+
+
+
 						?>
-						<br>
+
 						<button type="submit" class="btn btn-outline-dark btn-block">Realizar alteração</button><br>
 						<a href = "main.php" class="alert-link" id="cadastroLink"> Retornar à tela inicial </a>
 					</form>
