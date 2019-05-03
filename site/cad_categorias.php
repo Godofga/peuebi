@@ -63,7 +63,7 @@
 						?>
 
 						<button type="submit" class="btn btn-outline-dark btn-block">Cadastrar categoria</button><br>
-						<a href = "index.php" class="alert-link" id="cadastroLink"> Voltar à tela inicial </a>
+						<a href = "main.php" class="alert-link" id="cadastroLink"> Voltar à tela inicial </a>
 					</form>
 				</section>
 		</section>
