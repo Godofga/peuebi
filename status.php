@@ -23,37 +23,9 @@
 
     		if(!checkRoot()){
     			header('location:main.php');
-				} else 	if(isset($_POST['pedido']) && isset($_POST['gender'])){
-					$con = new conexaoDao();
-					$id = $_POST['pedido'];
-					$status = $_POST['gender'];
-					$quant1;
-					$quant2;
-					$ide;
-					echo "oie";
-					$queri = "select produto.id,produto.quantidade, pedidoitens.quantidade 'arroz' from pedido inner join pedidoitens on (pedido.id = pedidoitens.id_pedido)
-inner join produto on(produto.id = pedidoitens.id_produto) where pedido.id = $id";
-					$resultado =$con->exeSql($queri);
-					if($con->exeSql($queri,true)){
-						while($row = $resultado->fetch_assoc()){
-							$quant1 = $row["quantidade"];
-							$quant2 = $row["arroz"];
-							$ide = $row["id"];
-						}
-					}
-					if($quant1>=$quant2){
-						if($con->exeSql("select * from pedido where id = $id",true)){
-							$total = $quant1-$quant2;
-							$con->exeSql("update pedido set situacao = '$status' where id = $id");
-							$con->exeSql("update produto set quantidade = $total where id = $ide");
-							echo 'Feito!<br/>';
-						}
-						else {
-							echo 'Id não existente!<br/>';
-						}
-					} else echo "quantidade limite ultrapassada";
-
 				}
+
+
 
 
 
@@ -102,7 +74,7 @@ inner join produto on(produto.id = pedidoitens.id_produto) where pedido.id = $id
 						</div>
 						<div class="btn-group btn-group-toggle" data-toggle="buttons">
 						  <label class="btn btn-secondary">
-						    <input type="radio" name="gender" id="option1" autocomplete="off" value = "Aprovado"> Aprovar 
+						    <input type="radio" name="gender" id="option1" autocomplete="off" value = "Aprovado"> Aprovar
 						  </label>
 						  <label class="btn btn-secondary">
 						    <input type="radio" name="gender" id="option2" autocomplete="off" value = "Negado"> Negativar
@@ -110,6 +82,54 @@ inner join produto on(produto.id = pedidoitens.id_produto) where pedido.id = $id
 						</div>
 						<br>
 						<br>
+						<?php
+
+						if(isset($_POST['pedido']) && isset($_POST['gender'])){
+							$con = new conexaoDao();
+							$id = $_POST['pedido'];
+							$status = $_POST['gender'];
+							$quant1;
+							$quant2;
+							$ide;
+							$queri = "select produto.id,produto.quantidade, pedidoitens.quantidade 'arroz' from pedido inner join pedidoitens on (pedido.id = pedidoitens.id_pedido)
+		inner join produto on(produto.id = pedidoitens.id_produto) where pedido.id = $id";
+							$resultado =$con->exeSql($queri);
+							if($con->exeSql($queri,true)){
+								while($row = $resultado->fetch_assoc()){
+									$quant1 = $row["quantidade"];
+									$quant2 = $row["arroz"];
+									$ide = $row["id"];
+								}
+							}
+							if($quant1>=$quant2){
+								if($con->exeSql("select * from pedido where id = $id",true)){
+									$total = $quant1-$quant2;
+									$con->exeSql("update pedido set situacao = '$status' where id = $id");
+									$con->exeSql("update produto set quantidade = $total where id = $ide");
+									echo "
+										<div class='alert alert-success' role='alert'>
+											Mudança efetuada!
+										</div>";
+								}
+								else {
+									echo "
+										<div class='alert alert-warning' role='alert'>
+											O id não existe!
+										</div>";
+								}
+							} else
+							echo "
+								<div class='alert alert-warning' role='alert'>
+									Quantidade limite ultrapassada!
+								</div>";
+
+						}
+
+
+
+
+
+						 ?>
 
 						<button type="submit" class="btn btn-outline-dark btn-block">Realizar alteração</button><br>
 						<a href = "main.php" class="alert-link" id="cadastroLink"> Retornar à tela inicial </a>
