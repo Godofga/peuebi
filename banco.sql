@@ -66,3 +66,4 @@ create table pedidoitens(
     valor float,
     total float
 );
+insert into usuario ( cpf, id_endereco, nome_cliente, e_mail, nome_usuario, senha, root) values ('123',null, 'root', 'asd@ase', 'root', 'root', 1) 
