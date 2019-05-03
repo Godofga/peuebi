@@ -29,19 +29,23 @@
 					$status = $_POST['gender'];
 					$quant1;
 					$quant2;
+					$ide;
 					echo "oie";
-					$queri = "select produto.quantidade, pedidoitens.quantidade from pedido inner join pedidoitens on (pedido.id = pedidoitens.id_pedido)
+					$queri = "select produto.id,produto.quantidade, pedidoitens.quantidade 'arroz' from pedido inner join pedidoitens on (pedido.id = pedidoitens.id_pedido)
 inner join produto on(produto.id = pedidoitens.id_produto) where pedido.id = $id";
 					$resultado =$con->exeSql($queri);
 					if($con->exeSql($queri,true)){
 						while($row = $resultado->fetch_assoc()){
-							$quant1 = $row["produto.quantidade"];
-							$quant2 = $row["pedidoitens.quantidade"];
+							$quant1 = $row["quantidade"];
+							$quant2 = $row["arroz"];
+							$ide = $row["id"];
 						}
 					}
 					if($quant1>=$quant2){
 						if($con->exeSql("select * from pedido where id = $id",true)){
+							$total = $quant1-$quant2;
 							$con->exeSql("update pedido set situacao = '$status' where id = $id");
+							$con->exeSql("update produto set quantidade = $total where id = $ide");
 							echo 'Feito!<br/>';
 						}
 						else {
@@ -97,11 +101,11 @@ inner join produto on(produto.id = pedidoitens.id_produto) where pedido.id = $id
 							<input type="number" class="form-control" id="pedido" name="pedido" placeholder="Id do pedido para alteração">
 						</div>
 						<div class="btn-group btn-group-toggle" data-toggle="buttons">
-						  <label class="btn btn-secondary active">
-						    <input type="radio" name="gender" id="option1" autocomplete="off" checked value = "Aprovado"> Aprovar
+						  <label class="btn btn-secondary">
+						    <input type="radio" name="gender" id="option1" autocomplete="off" value = "Aprovado"> Aprovar 
 						  </label>
 						  <label class="btn btn-secondary">
-						    <input type="radio" name="gender" id="option2" autocomplete="off" value = "Negado"> Negar
+						    <input type="radio" name="gender" id="option2" autocomplete="off" value = "Negado"> Negativar
 						  </label>
 						</div>
 						<br>
