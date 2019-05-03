@@ -23,11 +23,11 @@
     			header('location:main.php');
 
 
-        else if(isset($_POST['pedido']) && isset($_POST['estado'])){
+        else if(isset($_POST['pedido']) && isset($_POST['gender'])){
 
           $con = new conexaoDao();
 					$id = $_POST['pedido'];
-					$status = $_POST['estado'];
+					$status = $_POST['gender'];
 					if($con->exeSql("select * from pedido where id = $id",true)){
 						$con->exeSql("update pedido set situacao = '$status' where id = $id");
           	echo 'Feito!<br/>';
