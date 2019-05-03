@@ -28,6 +28,7 @@
           $con = new conexaoDao();
 					$id = $_POST['pedido'];
 					$status = $_POST['gender'];
+					
 					if($con->exeSql("select * from pedido where id = $id",true)){
 						$con->exeSql("update pedido set situacao = '$status' where id = $id");
           	echo 'Feito!<br/>';
