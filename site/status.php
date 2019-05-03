@@ -86,6 +86,7 @@
 						$status = $_POST['gender'];
 						$quant1;
 						$quant2;
+						echo "oie";
 						$queri = "select produto.quantidade, pedidoitens.quantidade from pedido inner join pedidoitens on (pedido.id = pedidoitens.id_pedido)
 	inner join produto on(produto.id = pedidoitens.id_produto) where pedido.id = $id";
 						$result = $con->exeSql($queri,true);
