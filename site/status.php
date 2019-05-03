@@ -23,11 +23,12 @@
     			header('location:main.php');
 
 
-        else if(isset($_POST['pedido']) && isset($_POST['estado'])){
+        else if(isset($_POST['pedido']) && isset($_POST['gender'])){
 
           $con = new conexaoDao();
 					$id = $_POST['pedido'];
-					$status = $_POST['estado'];
+					$status = $_POST['gender'];
+					
 					if($con->exeSql("select * from pedido where id = $id",true)){
 						$con->exeSql("update pedido set situacao = '$status' where id = $id");
           	echo 'Feito!<br/>';
@@ -54,7 +55,7 @@
 			<?php
 
 				$con = new conexaoDao();
-				$query = "SELECT * from pedido";
+				$query = "SELECT * from pedido where situacao = 'pendente'";
 				$resultado =$con->exeSql($query);
 				if($con->exeSql($query,true)){
 					while($row = $resultado->fetch_assoc()){
@@ -68,10 +69,13 @@
 
 		<div>
 			<form action = "status.php" method="POST">
-				Id do pedido para alteração:<br/>
-				<input type="number" name="pedido"></input><br/>
-        Novo estado do pedido:<br/>
-				<input type="text" name="estado"></input><br/>
+				<br>
+				Id do pedido para alteração:<br/><br>
+				<input type="number" name="pedido"></input><br/><br>
+        		Novo estado do pedido:<br/><br>
+				<input type="radio" name="gender" value = "Aprovado"> Aprovar<br><br>
+				<input type="radio" name="gender" value = "Negado"> Negar<br>
+				<br>
 
 				<input type="submit" value= "Realizar alteração"/><br/>
 			</form>
