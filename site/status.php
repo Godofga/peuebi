@@ -81,26 +81,29 @@
 						<?php
 
 						if(isset($_POST['pedido']) && isset($_POST['gender'])){
-
-		          $con = new conexaoDao();
-							$id = $_POST['pedido'];
-							$status = $_POST['gender'];
-
+							$con = new conexaoDao();
+						$id = $_POST['pedido'];
+						$status = $_POST['gender'];
+						$quant1;
+						$quant2;
+						$queri = "select produto.quantidade, pedidoitens.quantidade from pedido inner join pedidoitens on (pedido.id = pedidoitens.id_pedido)
+	inner join produto on(produto.id = pedidoitens.id_produto) where pedido.id = $id";
+						$result = $con->exeSql($queri,true);
+						while($row = $result->fetch_assoc()){
+							$this->quant1 = $row["produto.quantidade"];
+							$this->quant2 = $row["pedidoitens.quantidade"];
+						}
+						if($this->quant1>=$this->quant2){
 							if($con->exeSql("select * from pedido where id = $id",true)){
 								$con->exeSql("update pedido set situacao = '$status' where id = $id");
-		          	echo "
-									<div class='alert alert-success' role='alert'>
-										Feito!
-									</div>";
+		          	echo 'Feito!<br/>';
 							}
 							else {
-								echo "
-									<div class='alert alert-danger' role='alert'>
-										Id inexistente!
-									</div>";
+								echo 'Id não existente!<br/>';
 							}
+						} else echo "quantidade limite ultrapassada";
 
-		        }
+	        }
 
 
 
